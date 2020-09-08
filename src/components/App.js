@@ -1,6 +1,6 @@
 import React from 'react'
 import '../assets/css/App.css'
-import { Header } from './index'
+import { Header, SearchBar } from './index'
 
 import {
     SwipeableTemporaryDrawer,
@@ -27,6 +27,7 @@ export class App extends React.Component {
                 <SwipeableTemporaryDrawer ref={this.childRef} />
                 <SimpleBreadcrumbs />
                 <Header />
+                <SearchBar />
             </div>
         )
     }
