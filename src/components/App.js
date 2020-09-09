@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import '../assets/css/App.css'
 import { Header, SearchBar } from './index'
 
@@ -11,7 +11,7 @@ import {
 // test Elastic connection
 //connect()
 
-export class App extends React.Component {
+export class App extends Component {
     constructor(props) {
         super(props)
         this.childRef = React.createRef()

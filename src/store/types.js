@@ -1,3 +1,18 @@
-export const REQUEST_SEARCH_RESULTS = 'REQUEST_SEARCH_RESULTS'
-export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS'
-export const ERROR_SEARCH_RESULTS = 'ERROR_SEARCH_RESULTS'
+export const fetchTypes = {
+    RESULTS: 'RESULTS'
+}
+
+export const status = {
+    START: 'START',
+    CLEAR: 'CLEAR',
+    SUCCESS: 'SUCCESS',
+    FAILURE: 'FAILURE',
+    REQUEST: 'REQUEST',
+    RECEIVE: 'RECEIVE',
+    ERROR: 'ERROR'
+}
+
+export const actions = {
+    REQUEST_RESULTS: 'REQUEST_RESULTS',
+    RECEIVE_RESULTS: 'RECEIVE_RESULTS'
+}

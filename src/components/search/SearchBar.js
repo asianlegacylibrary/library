@@ -1,6 +1,8 @@
 import React from 'react'
+import { fetchResultsAction } from '../../store/actions'
+import { connect } from 'react-redux'
 
-export class SearchBar extends React.Component {
+class clxSearchBar extends React.Component {
     state = {
         term: ''
     }
@@ -12,13 +14,7 @@ export class SearchBar extends React.Component {
 
     handleNewSearch = (e) => {
         e.preventDefault()
-        this.updateSearchDefinitionAndFetch()
-    }
-
-    updateSearchDefinitionAndFetch = () => {
-        this.setState({ searchDefinition: this.state.term }, () => {
-            this.props.fetchResults(this.state.searchDefinition)
-        })
+        this.props.fetchResultsAction({ term: this.state.term })
     }
 
     render() {
@@ -36,3 +32,5 @@ export class SearchBar extends React.Component {
         )
     }
 }
+
+export const SearchBar = connect(null, { fetchResultsAction })(clxSearchBar)

@@ -1,16 +1,24 @@
 import axios from 'axios'
 
 const expressOptions = {
+    baseUrl_Alt: 'http://api.asianclassics.org',
     baseUrl: '/api',
     devUrl: 'http://localhost:5000'
 }
 
-// check dev environment, we're proxying through NGINX on 8081 port (/api endpoint)
 const expressUrl =
     window.location.port === '3000'
         ? expressOptions.devUrl
         : expressOptions.baseUrl
 
-export default axios.create({
+export const expressURL = axios.create({
+    //baseURL: express,
     baseURL: expressUrl
 })
+
+// Express Routes for the Digital Library
+export const elastic = {
+    collections: '/collections',
+    search: '/search',
+    searchItems: '/search/items'
+}
