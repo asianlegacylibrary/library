@@ -2,7 +2,7 @@ import React from 'react'
 import { fetchResultsAction } from '../../store/actions'
 import { connect } from 'react-redux'
 
-class clxSearchBar extends React.Component {
+class SearchBar_PreConnect extends React.Component {
     state = {
         term: ''
     }
@@ -33,4 +33,6 @@ class clxSearchBar extends React.Component {
     }
 }
 
-export const SearchBar = connect(null, { fetchResultsAction })(clxSearchBar)
+export const SearchBar = connect(null, { fetchResultsAction })(
+    SearchBar_PreConnect
+)

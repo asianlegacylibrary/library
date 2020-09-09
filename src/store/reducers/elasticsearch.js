@@ -2,7 +2,6 @@ import { actions } from '../types'
 import { initialState } from '../initialState'
 
 export default (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
         /* REQUESTS */
         case actions.REQUEST_RESULTS:
@@ -15,7 +14,6 @@ export default (state = initialState, action) => {
                 }
             }
         case actions.RECEIVE_RESULTS:
-            console.log(action.payload)
             return {
                 ...state,
                 results: {
@@ -33,8 +31,14 @@ export default (state = initialState, action) => {
         case actions.ERROR_RESULTS:
             return {
                 ...state,
-                error: true,
-                errorStatus: action.payload
+                results: {
+                    ...state.search,
+                    isFetching: false,
+                    currentSearch: true,
+                    error: true,
+                    errorStatus: action.payload
+                },
+                msg: 'Cannot connect with our library...'
             }
         default:
             return state

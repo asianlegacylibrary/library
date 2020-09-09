@@ -7,10 +7,6 @@ import {
     SimpleBreadcrumbs
 } from '../components/material'
 
-//import connect from '../connect'
-// test Elastic connection
-//connect()
-
 export class App extends Component {
     constructor(props) {
         super(props)

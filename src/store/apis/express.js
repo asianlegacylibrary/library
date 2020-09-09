@@ -12,7 +12,6 @@ const expressUrl =
         : expressOptions.baseUrl
 
 export const expressURL = axios.create({
-    //baseURL: express,
     baseURL: expressUrl
 })
 
@@ -20,5 +19,5 @@ export const expressURL = axios.create({
 export const elastic = {
     collections: '/collections',
     search: '/search',
-    searchItems: '/search/items'
+    searchItems: '/search/items1'
 }
