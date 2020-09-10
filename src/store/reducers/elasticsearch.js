@@ -8,37 +8,34 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 results: {
-                    ...state.search,
-                    isFetching: true,
-                    currentSearch: false
+                    ...state.results,
+                    isFetching: true
                 }
             }
         case actions.RECEIVE_RESULTS:
             return {
                 ...state,
                 results: {
-                    ...state.search,
+                    ...state.results,
                     isFetching: false,
-                    currentSearch: true,
-                    error: false,
-                    errorStatus: null,
-                    items: {
+                    data: {
                         hits: action.payload.results
-                    },
-                    lastUpdated: Date.now()
+                    }
                 }
             }
         case actions.ERROR_RESULTS:
             return {
                 ...state,
+                error: true,
                 results: {
-                    ...state.search,
+                    ...state.results,
                     isFetching: false,
-                    currentSearch: true,
-                    error: true,
-                    errorStatus: action.payload
-                },
-                msg: 'Cannot connect with our library...'
+                    error: {
+                        url: action.payload.config.url,
+                        errorStatus: action.payload.status,
+                        msg: 'Cannot connect with our library...'
+                    }
+                }
             }
         default:
             return state

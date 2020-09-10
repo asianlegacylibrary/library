@@ -1,16 +1,15 @@
 export const initialState = {
+    error: false,
     results: {
         isFetching: false,
-        currentSearch: false,
-        items: {
+        error: {},
+        data: {
             hits: {
                 total: {
                     value: 0
                 },
                 hits: []
             }
-        },
-        aggregations: {},
-        lastUpdated: null
+        }
     }
 }

@@ -3,13 +3,24 @@ import { expressURL, elastic } from '../express'
 export const fetchResults = async (args) => {
     let term = args.term ? args.term : ''
     let offset = args.offset ? args.offset : 0
+    let response
+
     try {
-        const data = await expressURL.get(elastic.searchItems, {
+        response = await expressURL.get(elastic.searchItems, {
             params: { term, offset }
         })
-        return { data: data.data }
+
+        console.log('axios request', response)
+        return response
     } catch (error) {
-        console.error('there been fetchResults error ', error)
-        return error
+        console.log('An error occured fetching data from Elasticsearch', error)
+
+        if (error.response) {
+            return error.response
+        } else if (error.request) {
+            return error.request
+        } else {
+            return error.message
+        }
     }
 }

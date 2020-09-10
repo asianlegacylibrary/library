@@ -20,6 +20,7 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
     }
 
     const successAction = (payload) => {
+        console.log('success?', payload)
         return {
             type: actionTypeReceive,
             payload: payload
@@ -27,6 +28,7 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
     }
 
     const failureAction = (error) => {
+        console.log('failure? rejoice!')
         return {
             type: actionTypeError,
             payload: error
@@ -35,18 +37,17 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
 
     const asyncAction = (args) => {
         return async (dispatch) => {
-            if (['ID', 'RESULTS'].some((el) => actionType.includes(el))) {
-                dispatch(clearAction())
-            }
+            // if (['ID', 'RESULTS'].some((el) => actionType.includes(el))) {
+            //     dispatch(clearAction())
+            // }
             dispatch(startAction())
-            try {
-                const { data } = await asyncFunc(args)
-                dispatch(successAction(data))
-            } catch (error) {
-                dispatch(failureAction(error))
+            const response = await asyncFunc(args)
+            //console.log(response.status, response.data)
+            if (response.status === 200) {
+                dispatch(successAction(response))
+            } else {
+                dispatch(failureAction(response))
             }
         }
     }
-
-    return asyncAction
 }
