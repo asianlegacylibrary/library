@@ -9,8 +9,6 @@ export const fetchResults = async (args) => {
         response = await expressURL.get(elastic.searchItems, {
             params: { term, offset }
         })
-
-        console.log('axios request', response)
         return response
     } catch (error) {
         console.log('An error occured fetching data from Elasticsearch', error)

@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
                     ...state.results,
                     isFetching: false,
                     data: {
-                        hits: action.payload.results
+                        hits: action.payload.data.results.hits
                     }
                 }
             }

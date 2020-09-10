@@ -50,4 +50,5 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
             }
         }
     }
+    return asyncAction
 }
