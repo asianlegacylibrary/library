@@ -6,13 +6,13 @@ const expressOptions = {
     devUrl: 'http://localhost:5000'
 }
 
-const expressUrl =
+const setUrl =
     window.location.port === '3000'
         ? expressOptions.devUrl
-        : expressOptions.baseUrl
+        : expressOptions.baseUrl_Alt
 
 export const expressURL = axios.create({
-    baseURL: expressUrl
+    baseURL: setUrl
 })
 
 // Express Routes for the Digital Library
