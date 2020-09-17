@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const expressOptions = {
-    baseUrl_Alt: 'http://api.asianclassics.org',
+    baseUrl_Alt: 'https://api.asianclassics.org',
     baseUrl: '/api',
     devUrl: 'http://localhost:5000'
 }
