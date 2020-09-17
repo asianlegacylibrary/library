@@ -2,6 +2,7 @@ import { App, About } from '../../components'
 
 export default [
     { path: '/', name: 'App', Component: App },
+    { path: '/results/:term', name: 'Results', Component: App },
     { path: '/about', name: 'About', Component: About }
     // { path: '/pizza/:pizzaId', name: 'Edit Pizza', Component: App },
     // {

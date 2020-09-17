@@ -1,9 +1,8 @@
 import { actions } from '../types'
 import { initialState } from '../initialState'
 
-export default (state = initialState, action) => {
+export default (state = initialState.elasticsearch, action) => {
     switch (action.type) {
-        /* REQUESTS */
         case actions.REQUEST_RESULTS:
             return {
                 ...state,
@@ -18,6 +17,7 @@ export default (state = initialState, action) => {
                 results: {
                     ...state.results,
                     isFetching: false,
+                    url: action.payload.config.url,
                     data: {
                         hits: action.payload.data.results.hits
                     }
@@ -26,14 +26,13 @@ export default (state = initialState, action) => {
         case actions.ERROR_RESULTS:
             return {
                 ...state,
-                error: true,
                 results: {
                     ...state.results,
                     isFetching: false,
+                    url: action.payload.config.url,
                     error: {
-                        url: action.payload.config.url,
                         errorStatus: action.payload.status,
-                        msg: 'Cannot connect with our library...'
+                        generalMsgToUser: 'Cannot connect with our library...'
                     }
                 }
             }

@@ -1,10 +1,11 @@
+import './assets/css/variables.css'
+import './assets/css/index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import './assets/css/index.css'
-import { AppRouter } from './components/Router'
+
+import { AppRouter } from './components/AppRouter'
 import * as serviceWorker from './serviceWorker'
-import CssBaseline from '@material-ui/core/CssBaseline'
 
 import configureStore from './store'
 export const store = configureStore()
@@ -13,9 +14,7 @@ const Root = () => {
     return (
         <React.StrictMode>
             <Provider store={store}>
-                <CssBaseline>
-                    <AppRouter />
-                </CssBaseline>
+                <AppRouter />
             </Provider>
         </React.StrictMode>
     )

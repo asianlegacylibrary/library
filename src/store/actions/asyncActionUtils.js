@@ -3,7 +3,7 @@ import { status } from '../types'
 export const getAsyncAction = ({ actionType, asyncFunc }) => {
     const actionTypeRequest = `${status.REQUEST}_${actionType}`
     const actionTypeReceive = `${status.RECEIVE}_${actionType}`
-    const actionTypeClear = `${status.CLEAR}_${actionType}`
+    //const actionTypeClear = `${status.CLEAR}_${actionType}`
     const actionTypeError = `${status.ERROR}_${actionType}`
     //const actionTypeResources = `RECEIVE_ASSOCIATED_RECORDS`
 
@@ -13,11 +13,11 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
         }
     }
 
-    const clearAction = () => {
-        return {
-            type: actionTypeClear
-        }
-    }
+    // const clearAction = () => {
+    //     return {
+    //         type: actionTypeClear
+    //     }
+    // }
 
     const successAction = (payload) => {
         console.log('success?', payload)

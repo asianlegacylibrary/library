@@ -1,0 +1,26 @@
+.MuiCard-root {
+    padding: var(--padding-sub-container);
+    margin: var(--padding-sub-container);
+    margin-bottom: 0.5rem;
+}
+
+.card-meta {
+    font-size: 0.8rem;
+    letter-spacing: 0.04rem;
+    color: var(--color-subtitle);
+}
+.card-highlights em {
+    background-color: var(--color-highlight);
+}
+.span-title {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding-right: var(--padding-sub-container);
+}
+
+/* laptops */
+@media only screen and (min-width: 62rem) {
+    .MuiCard-root {
+        width: 66%;
+    }
+}

@@ -15,5 +15,10 @@ export const status = {
 export const actions = {
     REQUEST_RESULTS: 'REQUEST_RESULTS',
     RECEIVE_RESULTS: 'RECEIVE_RESULTS',
-    ERROR_RESULTS: 'ERROR_RESULTS'
+    ERROR_RESULTS: 'ERROR_RESULTS',
+    SET_SEARCH_TERM: 'SET_SEARCH_TERM'
+}
+
+export const constants = {
+    searchUrlBase: 'search'
 }

@@ -1,38 +1,25 @@
+import { Input } from '@material-ui/core'
+import '../../assets/css/mui/Input.css'
+import '../../assets/css/Search-Bar.css'
 import React from 'react'
-import { fetchResultsAction } from '../../store/actions'
-import { connect } from 'react-redux'
 
-class SearchBar_PreConnect extends React.Component {
-    state = {
-        term: ''
-    }
-
-    handleChange = (e) => {
-        e.preventDefault()
-        this.setState({ term: e.target.value })
-    }
-
-    handleNewSearch = (e) => {
-        e.preventDefault()
-        this.props.fetchResultsAction({ term: this.state.term })
-    }
-
-    render() {
-        return (
-            <input
-                className='search-input'
+export const SearchBar = ({ value, handleChange, handleNewSearch }) => {
+    return (
+        <div className='search-bar'>
+            <Input
+                className='MuiInput-root'
+                spellCheck='false'
+                autoCapitalize='false'
+                autoCorrect='false'
+                autoComplete='false'
                 autoFocus
                 type='text'
-                value={this.state.term}
-                onChange={(e) => this.handleChange(e)}
+                value={value}
+                onChange={(e) => handleChange(e)}
                 onKeyDown={(e) =>
-                    e.key === 'Enter' ? this.handleNewSearch(e) : null
+                    e.key === 'Enter' ? handleNewSearch(e) : null
                 }
             />
-        )
-    }
+        </div>
+    )
 }
-
-export const SearchBar = connect(null, { fetchResultsAction })(
-    SearchBar_PreConnect
-)
