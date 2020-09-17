@@ -11,6 +11,7 @@
 }
 .card-highlights em {
     background-color: var(--color-highlight);
+    font-style: normal;
 }
 .span-title {
     text-transform: uppercase;
