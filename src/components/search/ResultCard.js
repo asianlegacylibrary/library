@@ -1,11 +1,11 @@
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
+//import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import '../../assets/css/mui/Card.css'
 
 import React from 'react'
 
-const hlt_keys = ['author-tibetan', 'title-tibetan', 'colophon']
+//const hlt_keys = ['author-tibetan', 'title-tibetan', 'colophon']
 
 function buildHighlights(highlights) {
     let b = []
@@ -27,15 +27,14 @@ function buildHighlights(highlights) {
 }
 
 export function ResultCard({ data }) {
-    const { _id, highlight, _source } = data
-    //console.log(highlight)
-    const h = buildHighlights(highlight)
+    const { _id, highlight } = data
+    const h = highlight == null ? null : buildHighlights(highlight)
 
     return (
         <Card className='MuiCard-root' square={true} elevation={0}>
             <CardContent>
                 <div className='card-meta'>{_id}</div>
-                <div className='card-highlights'>{h}</div>
+                {h ? <div className='card-highlights'>{h}</div> : null}
             </CardContent>
         </Card>
     )

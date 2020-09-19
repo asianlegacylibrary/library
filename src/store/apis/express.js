@@ -1,15 +1,21 @@
 import axios from 'axios'
 
+let setUrl
 const expressOptions = {
-    baseUrl_Alt: 'https://api.asianclassics.org',
-    baseUrl: '/api',
-    devUrl: 'http://localhost:5000'
+    baseUrl: 'https://api.asianclassics.org',
+    baseUrl_alt: '/api',
+    devUrl: 'http://localhost:5000',
+    forceProduction: true
 }
 
-const setUrl =
-    window.location.port === '3000'
-        ? expressOptions.devUrl
-        : expressOptions.baseUrl_Alt
+if (expressOptions.forceProduction) {
+    setUrl = expressOptions.baseUrl
+} else {
+    setUrl =
+        window.location.port === '3000'
+            ? expressOptions.devUrl
+            : expressOptions.baseUrl
+}
 
 export const expressURL = axios.create({
     baseURL: setUrl
