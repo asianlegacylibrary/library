@@ -26,3 +26,8 @@
 // 2. take interface selections / text and map to url params and elasticsearch DSL
 
 // 3. understand lucene query parser and elasticsearch DSL
+
+export function queryParser(params) {
+    console.log('i in parser sir', params)
+    return params
+}

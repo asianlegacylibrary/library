@@ -1,14 +1,9 @@
 import { expressURL, elastic } from '../express'
 
-export const fetchResults = async (args) => {
-    let term = args.term ? args.term : ''
-    let offset = args.offset ? args.offset : 0
-    let response
-
+export const fetchResults = async (params) => {
     try {
-        response = await expressURL.get(elastic.searchItems, {
-            params: { term, offset }
-        })
+        let response = await expressURL.get(elastic.resources, { params })
+
         return response
     } catch (error) {
         console.log('An error occured fetching data from Elasticsearch', error)

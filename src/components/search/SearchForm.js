@@ -1,6 +1,6 @@
 import '../../assets/css/Search.css'
 import React from 'react'
-import { fetchResultsAction, setSearchTerm } from '../../store/actions'
+import { fetchResultsAction } from '../../store/actions'
 import { connect } from 'react-redux'
 import { SearchBar } from './index'
 import { withRouter } from 'react-router-dom'
@@ -8,36 +8,60 @@ import { constants } from '../../store/types'
 
 class SearchForm_PreConnect extends React.Component {
     state = {
-        term: ''
+        q: ''
     }
 
     componentDidMount = () => {
         // check for url params on mount, add to state
-        let term = new URLSearchParams(this.props.location.search).get('term')
-        if (term) {
-            this.setState({ term }, () => {
-                this.handleNewSearch()
-            })
+        //let q = new URLSearchParams(this.props.location.search).get('q')
+
+        let params = Object.fromEntries(
+            new URLSearchParams(this.props.location.search)
+        )
+
+        //console.log(params)
+
+        if (Object.keys(params).length > 0) {
+            if ('q' in params) {
+                this.setState({ q: params.q }, () => {
+                    this.initializeSearch(params)
+                })
+            } else {
+                this.initializeSearch(params)
+            }
         }
     }
 
     handleChange = (e) => {
         e.preventDefault()
-        this.setState({ term: e.target.value })
+        this.setState({ q: e.target.value })
     }
 
-    handleNewSearch = () => {
+    initializeSearch = (params) => {
+        this.props.fetchResultsAction(params)
+        this.handleRouting(params)
+    }
+
+    updateSearchBarQuery = () => {
         //e.preventDefault()
         console.log(this.props, this.state)
-        this.props.setSearchTerm(this.state.term)
-        this.props.fetchResultsAction({ term: this.state.term })
-        this.handleRouting(constants.searchUrlBase, this.state.term)
+
+        // check filters, etc once those components exist
+
+        this.initializeSearch({ q: this.state.q })
+        this.handleRouting({ q: this.state.q })
     }
 
-    handleRouting = (url, param) => {
+    handleRouting = (params) => {
+        let u = new URLSearchParams(params).toString()
+        //let pathName = `/${constants.searchUrlBase}${this.props.location.search}`
+        let pathName = `/${constants.searchUrlBase}?${u}`
+        console.log(u, pathName)
         this.props.history.push({
-            pathname: `/${url}?term=${param}`,
-            state: param
+            //pathname: `/${url}?q=${param}`,
+            pathname: pathName,
+            state: u
+            //search: u
         })
     }
 
@@ -45,15 +69,15 @@ class SearchForm_PreConnect extends React.Component {
         return (
             <div className='search-container'>
                 <SearchBar
-                    value={this.state.term}
+                    value={this.state.q}
                     handleChange={this.handleChange}
-                    handleNewSearch={this.handleNewSearch}
+                    handleNewSearch={this.updateSearchBarQuery}
                 />
             </div>
         )
     }
 }
 
-export const SearchForm = connect(null, { fetchResultsAction, setSearchTerm })(
-    withRouter(SearchForm_PreConnect)
-)
+export const SearchForm = connect(null, {
+    fetchResultsAction
+})(withRouter(SearchForm_PreConnect))

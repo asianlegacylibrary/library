@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import elasticsearch from './elasticsearch'
-import searchTerm from './setSearchTerm'
+import URLParams from './setURLParams'
 
 export default combineReducers({
     elasticsearch,
-    searchTerm
+    URLParams
 })

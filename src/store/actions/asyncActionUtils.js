@@ -19,6 +19,10 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
     //     }
     // }
 
+    const dealWithParameters = (params) => {
+        return { type: 'SET_URL_PARAMS', payload: params }
+    }
+
     const successAction = (payload) => {
         console.log('success?', payload)
         return {
@@ -35,13 +39,17 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
         }
     }
 
-    const asyncAction = (args) => {
-        return async (dispatch) => {
+    const asyncAction = (params) => {
+        console.log('async with args are', params)
+        return async (dispatch, getState) => {
             // if (['ID', 'RESULTS'].some((el) => actionType.includes(el))) {
             //     dispatch(clearAction())
             // }
+            if (params) {
+                dispatch(dealWithParameters(params))
+            }
             dispatch(startAction())
-            const response = await asyncFunc(args)
+            const response = await asyncFunc(getState().URLParams)
             //console.log(response.status, response.data)
             if (response.status === 200) {
                 dispatch(successAction(response))

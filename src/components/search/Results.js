@@ -5,7 +5,7 @@ import { ResultCard } from './index'
 
 export function Results() {
     const results = useSelector((state) => state.elasticsearch.results)
-    const r = results.data.hits.hits.map((r, i) => {
+    const r = results.data.hits.map((r, i) => {
         return <ResultCard key={i} data={r} />
     })
 

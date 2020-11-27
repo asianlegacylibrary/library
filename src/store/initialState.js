@@ -5,14 +5,23 @@ export const initialState = {
             isFetching: false,
             url: null,
             error: {},
+            total: {
+                value: 0
+            },
             data: {
-                hits: {
-                    total: {
-                        value: 0
-                    },
-                    hits: []
-                }
+                hits: []
             }
         }
+    },
+    URLParams: {
+        q: null,
+        class: null,
+        filter: null,
+        search_fields: null,
+        highlights: false,
+        page_size: 10,
+        page: 1,
+        near: null,
+        include_data: false
     }
 }

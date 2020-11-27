@@ -6,4 +6,12 @@
 
 .header-container {
     padding: var(--padding-container);
+    display: flex;
+    align-items: center;
+}
+.img-logo {
+    padding: 0.4em 1em 0.4em 0;
+}
+.show-params {
+    font-size: 0.8em;
 }

@@ -18,8 +18,9 @@ export default (state = initialState.elasticsearch, action) => {
                     ...state.results,
                     isFetching: false,
                     url: action.payload.config.url,
+                    total: { value: action.payload.data.total.value },
                     data: {
-                        hits: action.payload.data.results.hits
+                        hits: action.payload.data.hits
                     }
                 }
             }

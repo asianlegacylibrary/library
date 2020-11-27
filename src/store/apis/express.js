@@ -25,5 +25,6 @@ export const expressURL = axios.create({
 export const elastic = {
     collections: '/collections',
     search: '/search',
-    searchItems: '/search/items'
+    searchItems: '/search/items',
+    resources: '/resources'
 }
