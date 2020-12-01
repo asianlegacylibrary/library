@@ -7,6 +7,7 @@ export const fieldMapping = {
     'bibframe:collection': 'Collection',
     'all:items.bibframe:datasource': 'Text',
     'bibframe:datasource': 'Text',
+    'bibframe:role@author.bibframe:name': 'Author',
     'bibframe:role@author.bibframe:variantname': 'Author (Variant)',
     'bibframe:role@author.bibframe:variantname@eng': 'Author (English)',
     'bibframe:role@author.bibframe:variantname@skt': 'Author (Sanskrit)'
@@ -15,7 +16,8 @@ export const fieldMapping = {
 export const mainDisplayFields = [
     'bibframe:maintitle',
     'bibframe:varianttitle@colophon',
-    'bibframe:collection'
+    'bibframe:collection',
+    'bibframe:role@author[0].bibframe:variantname'
 ]
 
 export const languageMapping = {
@@ -28,4 +30,8 @@ export const collectionMapping = {
     SB: 'Sungbum',
     KG: 'Kangyur',
     TG: 'Tengyur'
+}
+
+export const rootFields = {
+    author: 'bibframe:role@author'
 }
