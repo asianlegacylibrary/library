@@ -1,0 +1,12 @@
+.MuiCard-root {
+    padding: var(--padding-sub-container);
+    margin: var(--padding-sub-container);
+    margin-bottom: 0.5rem;
+}
+
+/* laptops */
+@media only screen and (min-width: 62rem) {
+    .MuiCard-root {
+        width: 66%;
+    }
+}

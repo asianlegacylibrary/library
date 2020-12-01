@@ -1,8 +1,8 @@
-import '../../assets/css/Search.css'
+import '../../assets/css/Search.scss'
 import React from 'react'
-import { fetchResultsAction } from '../../store/actions'
+import { fetchResultsAction, resetURLParams } from '../../store/actions'
 import { connect } from 'react-redux'
-import { SearchBar } from './index'
+import { SearchBar, SearchOverview } from './index'
 import { withRouter } from 'react-router-dom'
 import { constants } from '../../store/types'
 
@@ -24,10 +24,10 @@ class SearchForm_PreConnect extends React.Component {
         if (Object.keys(params).length > 0) {
             if ('q' in params) {
                 this.setState({ q: params.q }, () => {
-                    this.initializeSearch(params)
+                    this.initializeSearch(params, 'initialize')
                 })
             } else {
-                this.initializeSearch(params)
+                this.initializeSearch(params, 'initialize')
             }
         }
     }
@@ -37,19 +37,15 @@ class SearchForm_PreConnect extends React.Component {
         this.setState({ q: e.target.value })
     }
 
-    initializeSearch = (params) => {
-        this.props.fetchResultsAction(params)
+    initializeSearch = (params, paramAction) => {
+        this.props.fetchResultsAction(params, paramAction)
         this.handleRouting(params)
     }
 
     updateSearchBarQuery = () => {
         //e.preventDefault()
-        console.log(this.props, this.state)
-
-        // check filters, etc once those components exist
-
-        this.initializeSearch({ q: this.state.q })
-        this.handleRouting({ q: this.state.q })
+        this.initializeSearch({ q: this.state.q }, 'reset')
+        //this.handleRouting({ q: this.state.q })
     }
 
     handleRouting = (params) => {
@@ -73,11 +69,13 @@ class SearchForm_PreConnect extends React.Component {
                     handleChange={this.handleChange}
                     handleNewSearch={this.updateSearchBarQuery}
                 />
+                <SearchOverview />
             </div>
         )
     }
 }
 
 export const SearchForm = connect(null, {
-    fetchResultsAction
+    fetchResultsAction,
+    resetURLParams
 })(withRouter(SearchForm_PreConnect))

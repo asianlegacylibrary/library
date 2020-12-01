@@ -1,0 +1,37 @@
+.search-container {
+    padding: var(--padding-container);
+    font-family: var(--font-family);
+}
+
+.search-controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.4em;
+}
+
+.url-params {
+    align-self: flex-end;
+    text-align: right;
+    p {
+        padding: 1em;
+        span {
+            display: block;
+        }
+    }
+}
+.results-total {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+
+    p {
+        padding: 1em;
+    }
+}
+
+/* laptops */
+@media only screen and (min-width: 62rem) {
+    .search-controls {
+        width: 66%;
+    }
+}

@@ -5,6 +5,9 @@ export default (state = initialState.URLParams, action) => {
     switch (action.type) {
         case actions.SET_URL_PARAMS:
             let p = action.payload
+
+            // here we're just cleaning up before sending to API
+            // getting rid of misspelled params
             for (let key in p) {
                 if (!(key in state)) delete p[key]
             }
@@ -13,11 +16,14 @@ export default (state = initialState.URLParams, action) => {
                 (key) => state[key] == null && delete state[key]
             )
 
-            console.log('setting parameters', state, p)
-
             return {
                 ...state,
                 ...p
+            }
+        case actions.RESET_URL_PARAMS:
+            return {
+                ...initialState.URLParams,
+                ...action.payload
             }
         default:
             return state

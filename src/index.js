@@ -1,5 +1,5 @@
-import './assets/css/variables.css'
-import './assets/css/index.css'
+import './assets/css/variables.scss'
+import './assets/css/index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'

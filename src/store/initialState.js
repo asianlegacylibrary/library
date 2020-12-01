@@ -9,7 +9,11 @@ export const initialState = {
                 value: 0
             },
             data: {
-                hits: []
+                hits: [],
+                total: {
+                    value: 0
+                },
+                error: {}
             }
         }
     },
@@ -18,7 +22,7 @@ export const initialState = {
         class: null,
         filter: null,
         search_fields: null,
-        highlights: false,
+        highlights: true,
         page_size: 10,
         page: 1,
         near: null,

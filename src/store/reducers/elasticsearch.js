@@ -18,9 +18,11 @@ export default (state = initialState.elasticsearch, action) => {
                     ...state.results,
                     isFetching: false,
                     url: action.payload.config.url,
-                    total: { value: action.payload.data.total.value },
+
                     data: {
-                        hits: action.payload.data.hits
+                        hits: action.payload.data.hits,
+                        total: { value: action.payload.data.total.value },
+                        error: {}
                     }
                 }
             }
@@ -31,9 +33,15 @@ export default (state = initialState.elasticsearch, action) => {
                     ...state.results,
                     isFetching: false,
                     url: action.payload.config.url,
-                    error: {
-                        errorStatus: action.payload.status,
-                        generalMsgToUser: 'Cannot connect with our library...'
+                    data: {
+                        total: {
+                            value: 0
+                        },
+                        error: {
+                            errorStatus: action.payload.data.errors[0].msg,
+                            generalMsgToUser:
+                                'Cannot connect with our library...'
+                        }
                     }
                 }
             }

@@ -1,6 +1,6 @@
 import { Input } from '@material-ui/core'
-import '../../assets/css/mui/Input.css'
-import '../../assets/css/Search-Bar.css'
+import '../../assets/css/mui/Input.scss'
+import '../../assets/css/Search-Bar.scss'
 import React from 'react'
 
 export const SearchBar = ({ value, handleChange, handleNewSearch }) => {

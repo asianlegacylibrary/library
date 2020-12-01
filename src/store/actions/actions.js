@@ -13,3 +13,10 @@ export const setURLParams = (params) => {
         payload: params
     }
 }
+
+export const resetURLParams = (payload) => {
+    return {
+        type: actions.RESET_URL_PARAMS,
+        payload: payload
+    }
+}
