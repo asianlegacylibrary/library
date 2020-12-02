@@ -15,3 +15,8 @@ code {
 .container {
     background-color: #efefef;
 }
+
+input:focus,
+textarea:focus {
+    outline: none;
+}

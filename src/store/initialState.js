@@ -20,7 +20,7 @@ export const initialState = {
     URLParams: {
         q: null,
         class: null,
-        filter: null,
+        filter: '',
         search_fields: null,
         highlights: true,
         page_size: 10,

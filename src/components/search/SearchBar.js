@@ -7,6 +7,7 @@ export const SearchBar = ({ value, handleChange, handleNewSearch }) => {
     return (
         <div className='search-bar'>
             <Input
+                name='q'
                 className='MuiInput-root'
                 spellCheck='false'
                 autoCapitalize='false'

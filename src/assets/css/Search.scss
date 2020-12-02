@@ -11,11 +11,25 @@
 
 .url-params {
     align-self: flex-end;
-    text-align: right;
+    text-align: left;
+    width: 80%;
     p {
         padding: 1em;
         span {
             display: block;
+        }
+    }
+    .param-filter {
+        font-family: var(--font-family);
+        background-color: transparent;
+        border: none;
+        font-size: inherit;
+        color: inherit;
+        width: 66%;
+        &:focus {
+            background-color: #ddd;
+            transition: background-color 500ms;
+            border: none;
         }
     }
 }
