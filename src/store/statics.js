@@ -41,21 +41,21 @@ export const rootFields = {
 export const URLParamsForUser = {
     q: '',
     filter: '',
-    search_fields: '',
-    highlights: true,
-    page_size: 10,
-    page: 1,
+    search_fields: ''
+    //highlights: true,
+    //page_size: 10,
+    //page: 1,
     //near: null,
-    class: 'works'
+    //class: 'works'
 }
 
 export const URLParamsPlaceholders = {
     q: 'Query',
     filter: 'ex. author:exists,collection:SB',
-    search_fields: 'ex. title,colophon,data,subject,author',
-    highlights: 'true or false',
-    page_size: 'number of results returned in each page',
-    page: 'page number',
+    search_fields: 'ex. title,colophon,data,subject,author'
+    //highlights: 'true or false',
+    //page_size: 'number of results returned in each page',
+    //page: 'page number',
     //near: 'Proximity',
-    class: 'Class'
+    //class: 'Class'
 }
