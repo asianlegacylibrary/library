@@ -20,3 +20,10 @@ input:focus,
 textarea:focus {
     outline: none;
 }
+
+input::-webkit-input-placeholder {
+    color: #aaa;
+}
+input:-moz-placeholder {
+    color: #aaa;
+}

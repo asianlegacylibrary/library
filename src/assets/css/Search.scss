@@ -21,18 +21,21 @@
     }
     .param-filter {
         font-family: var(--font-family);
-        background-color: transparent;
+        background-color: #ddd;
+        padding: 0.1em;
+        margin: 0.1em;
         border: none;
         font-size: inherit;
         color: inherit;
         width: 66%;
         &:focus {
-            background-color: #ddd;
+            background-color: #ccc;
             transition: background-color 500ms;
             border: none;
         }
     }
 }
+
 .results-total {
     font-weight: bold;
     text-transform: uppercase;

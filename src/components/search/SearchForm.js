@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 import { SearchBar } from './index'
 import { withRouter } from 'react-router-dom'
 import { constants } from '../../store/types'
-import { URLParamsForUser } from '../../store/statics'
+import { URLParamsForUser, URLParamsPlaceholders } from '../../store/statics'
 
 class SearchForm_PreConnect extends React.Component {
     state = {
-        params: URLParamsForUser
+        params: URLParamsForUser,
+        placeholders: URLParamsPlaceholders
     }
 
     componentDidMount = () => {
@@ -40,22 +41,15 @@ class SearchForm_PreConnect extends React.Component {
 
     handleInputChange = (event) => {
         event.preventDefault()
-        console.log(event.target.name)
         const target = event.target
-        //const value = target.type === 'checkbox' ? target.checked : target.value
         const name = target.name
 
-        this.setState(
-            (prevState) => ({
-                params: {
-                    ...prevState.params,
-                    [name]: target.value
-                }
-            }),
-            () => {
-                console.log('')
+        this.setState((prevState) => ({
+            params: {
+                ...prevState.params,
+                [name]: target.value
             }
-        )
+        }))
     }
 
     initializeSearch = (params, paramAction) => {
@@ -81,15 +75,10 @@ class SearchForm_PreConnect extends React.Component {
     }
 
     buildSearchParams = () => {
-        let p = {
-            ...this.state.params,
-            ...this.props.URLParams
-        }
-
-        const paramDisplay = Object.entries(this.state.params).map(([k, v]) => {
+        return Object.keys(this.state.params).map((k) => {
             return (
                 <span key={k}>
-                    {`${k} =>`}
+                    <label htmlFor={k}>{`${k} =>`}</label>
                     <input
                         name={k}
                         className='param-filter'
@@ -98,6 +87,7 @@ class SearchForm_PreConnect extends React.Component {
                         autoCorrect='false'
                         autoComplete='false'
                         type='text'
+                        placeholder={this.state.placeholders[k]}
                         value={this.state.params[k]}
                         onChange={(e) => this.handleInputChange(e)}
                         onKeyDown={(e) =>
@@ -109,7 +99,6 @@ class SearchForm_PreConnect extends React.Component {
                 </span>
             )
         })
-        return paramDisplay
     }
 
     render() {
