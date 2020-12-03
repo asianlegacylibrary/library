@@ -29,3 +29,19 @@ input::-webkit-input-placeholder {
 input:-moz-placeholder {
     color: #aaa;
 }
+
+.meowimg {
+    position: absolute;
+    overflow: hidden;
+    bottom: 0;
+    right: -300px;
+    z-index: 0;
+    opacity: 0.6;
+    visibility: hidden;
+}
+
+@media only screen and (min-width: 62rem) {
+    .meowimg {
+        visibility: visible;
+    }
+}
