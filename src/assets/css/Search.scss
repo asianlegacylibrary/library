@@ -61,6 +61,6 @@
 /* laptops */
 @media only screen and (min-width: 62rem) {
     .search-controls {
-        width: 66%;
+        width: var(--width-break-laptop);
     }
 }
