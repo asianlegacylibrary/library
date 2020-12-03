@@ -76,9 +76,10 @@ class SearchForm_PreConnect extends React.Component {
 
     buildSearchParams = () => {
         return Object.keys(this.state.params).map((k) => {
+            if (k === 'q') return null
             return (
                 <span key={k}>
-                    <label htmlFor={k}>{`${k} =>`}</label>
+                    <label htmlFor={k}>{`${k.toUpperCase()}: `}</label>
                     <input
                         name={k}
                         className='param-filter'
@@ -103,6 +104,7 @@ class SearchForm_PreConnect extends React.Component {
 
     render() {
         let p = this.buildSearchParams()
+        let resultsReceived = this.props.total > 0 ? true : false
         return (
             <div className='search-container'>
                 <SearchBar
@@ -111,12 +113,14 @@ class SearchForm_PreConnect extends React.Component {
                     handleNewSearch={this.updateSearchBarQuery}
                 />
                 <div className='search-controls'>
+                    <div
+                        className={`results-total ${
+                            resultsReceived ? 'more-than-zero' : ''
+                        }`}
+                    >{`Results: ${this.props.total}`}</div>
+
                     <div className='url-params'>
                         <p>{p}</p>
-                    </div>
-
-                    <div className='results-total'>
-                        <p>{`Results: ${this.props.total}`}</p>
                     </div>
                 </div>
             </div>

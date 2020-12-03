@@ -39,7 +39,7 @@ export const rootFields = {
 }
 
 export const URLParamsForUser = {
-    q: '',
+    //q: '',
     filter: '',
     search_fields: ''
     //highlights: true,
@@ -50,7 +50,7 @@ export const URLParamsForUser = {
 }
 
 export const URLParamsPlaceholders = {
-    q: 'Query',
+    //q: 'Query',
     filter: 'ex. author:exists,collection:SB',
     search_fields: 'ex. title,colophon,data,subject,author'
     //highlights: 'true or false',
