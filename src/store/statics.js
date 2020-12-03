@@ -51,11 +51,28 @@ export const URLParamsForUser = {
 
 export const URLParamsPlaceholders = {
     //q: 'Query',
-    filter: 'ex. author:exists,collection:SB',
-    search_fields: 'ex. title,colophon,data,subject,author'
+    filter: { name: 'filter', value: 'ex. author:exists,collection:SB' },
+    search_fields: {
+        name: 'search fields',
+        value: 'ex. title,colophon,data,subject,author'
+    }
     //highlights: 'true or false',
     //page_size: 'number of results returned in each page',
     //page: 'page number',
     //near: 'Proximity',
     //class: 'Class'
+}
+
+export const URLtest = {
+    //q: {param: 'q', name: 'query', placeholder: 'Query'},
+    filter: {
+        param: 'filter',
+        name: 'filter',
+        placeholder: 'ex. author:exists,collection:SB'
+    },
+    search_fields: {
+        param: 'search_fields',
+        name: 'search fields',
+        placeholder: 'ex. title,colophon,data,subject,author'
+    }
 }

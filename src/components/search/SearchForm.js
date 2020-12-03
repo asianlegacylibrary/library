@@ -79,7 +79,9 @@ class SearchForm_PreConnect extends React.Component {
             if (k === 'q') return null
             return (
                 <span key={k}>
-                    <label htmlFor={k}>{`${k.toUpperCase()}: `}</label>
+                    <label htmlFor={k}>{`${this.state.placeholders[
+                        k
+                    ].name.toUpperCase()}: `}</label>
                     <input
                         name={k}
                         className='param-filter'
@@ -88,7 +90,7 @@ class SearchForm_PreConnect extends React.Component {
                         autoCorrect='false'
                         autoComplete='false'
                         type='text'
-                        placeholder={this.state.placeholders[k]}
+                        placeholder={this.state.placeholders[k].value}
                         value={this.state.params[k]}
                         onChange={(e) => this.handleInputChange(e)}
                         onKeyDown={(e) =>
