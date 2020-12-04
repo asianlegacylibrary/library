@@ -54,7 +54,7 @@ export const URLParamsPlaceholders = {
     filter: { name: 'filter', value: 'ex. author:exists,collection:SB' },
     search_fields: {
         name: 'search fields',
-        value: 'ex. title,colophon,data,subject,author'
+        value: 'ex. title,colophon,text,subject,author'
     }
     //highlights: 'true or false',
     //page_size: 'number of results returned in each page',
@@ -73,6 +73,6 @@ export const URLtest = {
     search_fields: {
         param: 'search_fields',
         name: 'search fields',
-        placeholder: 'ex. title,colophon,data,subject,author'
+        placeholder: 'ex. title,colophon,text,subject,author'
     }
 }
