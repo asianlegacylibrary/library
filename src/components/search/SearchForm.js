@@ -28,7 +28,11 @@ class SearchForm_PreConnect extends React.Component {
                         ...prevState.params,
                         filter: locationParams.filter,
                         search_fields: locationParams.search_fields,
-                        q: locationParams.q
+                        q: locationParams.q,
+                        page_size: locationParams.page_size,
+                        page: locationParams.page,
+                        highlights: locationParams.highlights,
+                        class: locationParams.class
                     }
                 }),
                 () => {
