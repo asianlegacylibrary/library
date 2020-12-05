@@ -3,11 +3,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import '../../assets/css/mui/Card.scss'
 import '../../assets/css/Search-Card.scss'
-import {
-    fieldMapping,
-    mainDisplayFields,
-    rootFields
-} from '../../store/statics'
+import { mainDisplayFields, rootFields } from '../../store/statics'
 
 import React from 'react'
 
@@ -26,9 +22,11 @@ function buildHighlights(highlights) {
         if (mainDisplayFields.includes(key))
             display = display.filter((item) => item !== key)
 
-        // map fields to proper display names
-        if (key in fieldMapping) key = fieldMapping[key]
+        // map fields to proper display names *** currently off
+        //if (key in fieldMapping) key = fieldMapping[key]
+
         let vArr = []
+        // for now just push first author in array to display
         if (key.toLowerCase().includes('author')) {
             vArr.push(
                 <React.Fragment key={0}>
@@ -70,12 +68,31 @@ function buildHighlights(highlights) {
 function buildAuthor(source) {
     let author = Object.entries(source[rootFields.author][0]).map(([k, v]) => {
         if (v != null) {
-            return <p key={k}>{`${k} ${v}`}</p>
+            let subV = []
+            if (Array.isArray(v)) {
+                subV = v.map((a, i) => {
+                    return (
+                        <span key={i} className='author-variants'>
+                            {a}
+                        </span>
+                    )
+                })
+            } else {
+                subV = v
+            }
+            return (
+                <div>
+                    <span key={k} className='span-title'>
+                        {k}
+                    </span>
+                    {subV}
+                </div>
+            )
         }
-        return
+        return null
     })
 
-    return <div key='author-data'>{author}</div>
+    return <div className='author-data'>{author}</div>
 }
 
 // remaining function required so we don't display the highlight fields twice (from source and highlight)
@@ -94,7 +111,7 @@ function buildRemaining(source, remaining) {
             let value = Array.isArray(v) ? v[0] : v
             r.push(
                 <div key={k}>
-                    <span className='span-title'>{fieldMapping[k]}</span>
+                    <span className='span-title'>{k}</span>
                     {value}
                 </div>
             )
