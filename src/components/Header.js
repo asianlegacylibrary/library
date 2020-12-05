@@ -8,9 +8,9 @@ export function Header() {
     return (
         <header className='header'>
             <div className='header-container'>
-                <img className='img-logo' src={logo} alt='logo' width='40px' />
-                <p>
-                    Asian Legacy Library{' '}
+                <img className='img-logo' src={logo} alt='logo' width='50px' />
+                <p className='header-title'>
+                    API{' '}
                     {/* <span className='show-params'>
                         {unescape(location.pathname)}
                     </span> */}

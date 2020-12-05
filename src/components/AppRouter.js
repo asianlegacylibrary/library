@@ -9,7 +9,11 @@ export function AppRouter() {
         <Router>
             <StylesProvider injectFirst>
                 <div className='container'>
-                    <img className='meowimg' src={logo} />
+                    <img
+                        className='background-logo'
+                        src={logo}
+                        alt='main background logo'
+                    />
                     <Header />
                     <SearchForm />
                     <Switch>
