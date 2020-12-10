@@ -28,7 +28,7 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
     }
 
     const successAction = (payload) => {
-        console.log('success?', payload)
+        //console.log('success?', payload)
         return {
             type: actionTypeReceive,
             payload: payload
@@ -44,7 +44,7 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
     }
 
     const asyncAction = (params, paramAction) => {
-        console.log('async with args are', params, paramAction)
+        //console.log(paramAction, params)
         return async (dispatch, getState) => {
             // if (['ID', 'RESULTS'].some((el) => actionType.includes(el))) {
             //     dispatch(clearAction())

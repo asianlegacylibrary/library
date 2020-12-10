@@ -1,9 +1,11 @@
 import { Input } from '@material-ui/core'
 import '../../assets/css/mui/Input.scss'
 import '../../assets/css/Search-Bar.scss'
-import React from 'react'
+import React, { useState } from 'react'
 
 export const SearchBar = ({ value, handleChange, handleNewSearch }) => {
+    const [useValue] = useState(value)
+
     return (
         <div className='search-bar'>
             <Input
@@ -15,7 +17,7 @@ export const SearchBar = ({ value, handleChange, handleNewSearch }) => {
                 autoComplete='false'
                 autoFocus
                 type='text'
-                value={value}
+                value={useValue}
                 onChange={(e) => handleChange(e)}
                 onKeyDown={(e) =>
                     e.key === 'Enter' ? handleNewSearch(e) : null

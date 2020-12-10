@@ -88,6 +88,7 @@ class SearchForm_PreConnect extends React.Component {
 
     buildSearchParams = () => {
         return Object.keys(this.state.params).map((k) => {
+            // don't return Q, that's the search bar
             if (k === 'q') return null
             return (
                 <span key={k}>
@@ -114,13 +115,6 @@ class SearchForm_PreConnect extends React.Component {
                 </span>
             )
         })
-    }
-
-    handleCopy = () => {
-        console.log(
-            'copy',
-            `${this.state.baseUrl}/${this.props.location.pathname}`
-        )
     }
 
     render() {
@@ -151,7 +145,7 @@ class SearchForm_PreConnect extends React.Component {
                     className='btn-copy'
                     onClick={() => {
                         navigator.clipboard.writeText(
-                            `${this.state.baseUrl}/${this.props.location.pathname}`
+                            `${this.state.baseUrl}${this.props.location.pathname}`
                         )
                     }}
                 >
