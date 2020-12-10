@@ -35,7 +35,8 @@ export const collectionMapping = {
 }
 
 export const rootFields = {
-    author: 'bibframe:role@author'
+    author: 'bibframe:role@author',
+    subject: 'bibframe:subject'
 }
 
 export const URLParamsForUser = {
@@ -57,7 +58,7 @@ export const URLParamsPlaceholders = {
     },
     search_fields: {
         name: 'search fields',
-        value: 'ex. title,colophon,text,subject,author'
+        value: 'ex. title,colophon,data,subject,author'
     },
     highlights: { name: 'highlights', value: 'true or false' },
     page_size: {
@@ -79,6 +80,6 @@ export const URLtest = {
     search_fields: {
         param: 'search_fields',
         name: 'search fields',
-        placeholder: 'ex. title,colophon,text,subject,author'
+        placeholder: 'ex. title,colophon,data,subject,author'
     }
 }

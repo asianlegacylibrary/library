@@ -5,7 +5,7 @@ const expressOptions = {
     baseUrl: 'https://api.asianclassics.org',
     baseUrl_alt: '/api',
     devUrl: 'http://localhost:5000',
-    forceProduction: true
+    forceProduction: false
 }
 
 if (expressOptions.forceProduction) {

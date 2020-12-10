@@ -65,6 +65,40 @@ function buildHighlights(highlights) {
     return [b, display]
 }
 
+function buildNestedData(source, type) {
+    let nestedType = Object.entries(source[rootFields[type]][0]).map(
+        ([k, v]) => {
+            if (v != null) {
+                let subV = []
+                if (Array.isArray(v)) {
+                    subV = v.map((a, i) => {
+                        return (
+                            <span key={i} className={`${type}-variants`}>
+                                {a}
+                            </span>
+                        )
+                    })
+                } else {
+                    subV = v
+                }
+                return (
+                    <div key={k}>
+                        <span className='span-title'>{k}</span>
+                        {subV}
+                    </div>
+                )
+            }
+            return null
+        }
+    )
+
+    return (
+        <div key={type} className={`${type}-data`}>
+            {nestedType}
+        </div>
+    )
+}
+
 function buildAuthor(source) {
     let author = Object.entries(source[rootFields.author][0]).map(([k, v]) => {
         if (v != null) {
@@ -81,10 +115,8 @@ function buildAuthor(source) {
                 subV = v
             }
             return (
-                <div>
-                    <span key={k} className='span-title'>
-                        {k}
-                    </span>
+                <div key={k}>
+                    <span className='span-title'>{k}</span>
                     {subV}
                 </div>
             )
@@ -92,7 +124,11 @@ function buildAuthor(source) {
         return null
     })
 
-    return <div className='author-data'>{author}</div>
+    return (
+        <div key='authors' className='author-data'>
+            {author}
+        </div>
+    )
 }
 
 // remaining function required so we don't display the highlight fields twice (from source and highlight)
@@ -105,7 +141,11 @@ function buildRemaining(source, remaining) {
 
         let a = k === rootFields.author ? buildAuthor(source) : null
 
+        let s =
+            k === rootFields.subject ? buildNestedData(source, 'subject') : null
+
         r.push(a)
+        r.push(s)
 
         if (remaining.includes(k)) {
             let value = Array.isArray(v) ? v[0] : v

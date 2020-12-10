@@ -36,7 +36,6 @@ class SearchForm_PreConnect extends React.Component {
                     }
                 }),
                 () => {
-                    console.log(this.state)
                     this.buildSearchParams()
                     this.initializeSearch(this.state.params, 'initialize')
                 }
