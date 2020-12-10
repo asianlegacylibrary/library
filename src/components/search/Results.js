@@ -34,7 +34,5 @@ export function Results() {
         return <ResultCard key={i} data={r} />
     })
 
-    console.log(r)
-
     return <div className='search-results'>{r}</div>
 }

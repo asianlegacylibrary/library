@@ -1,4 +1,5 @@
 import '../../assets/css/Search.scss'
+import { Button } from '@material-ui/core'
 import React from 'react'
 import { fetchResultsAction, resetURLParams } from '../../store/actions'
 import { connect } from 'react-redux'
@@ -10,7 +11,8 @@ import { URLParamsForUser, URLParamsPlaceholders } from '../../store/statics'
 class SearchForm_PreConnect extends React.Component {
     state = {
         params: URLParamsForUser,
-        placeholders: URLParamsPlaceholders
+        placeholders: URLParamsPlaceholders,
+        baseUrl: ''
     }
 
     componentDidMount = () => {
@@ -20,6 +22,12 @@ class SearchForm_PreConnect extends React.Component {
         let locationParams = Object.fromEntries(
             new URLSearchParams(this.props.location.search)
         )
+
+        if (typeof window !== 'undefined') {
+            this.setState({
+                baseUrl: `${window.location.protocol}//${window.location.host}`
+            })
+        }
 
         if (Object.keys(locationParams).length > 0) {
             this.setState(
@@ -69,7 +77,7 @@ class SearchForm_PreConnect extends React.Component {
         let u = new URLSearchParams(params).toString()
         //let pathName = `/${constants.searchUrlBase}${this.props.location.search}`
         let pathName = `/${constants.searchUrlBase}?${u}`
-        console.log(u, pathName)
+
         this.props.history.push({
             //pathname: `/${url}?q=${param}`,
             pathname: pathName,
@@ -108,6 +116,13 @@ class SearchForm_PreConnect extends React.Component {
         })
     }
 
+    handleCopy = () => {
+        console.log(
+            'copy',
+            `${this.state.baseUrl}/${this.props.location.pathname}`
+        )
+    }
+
     render() {
         let p = this.buildSearchParams()
         let resultsReceived = this.props.total > 0 ? true : false
@@ -129,6 +144,19 @@ class SearchForm_PreConnect extends React.Component {
                         <p>{p}</p>
                     </div>
                 </div>
+                <Button
+                    variant='outlined'
+                    color='primary'
+                    disableElevation
+                    className='btn-copy'
+                    onClick={() => {
+                        navigator.clipboard.writeText(
+                            `${this.state.baseUrl}/${this.props.location.pathname}`
+                        )
+                    }}
+                >
+                    COPY SEARCH URL
+                </Button>
             </div>
         )
     }
