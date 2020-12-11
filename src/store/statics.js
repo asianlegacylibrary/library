@@ -40,7 +40,7 @@ export const rootFields = {
 }
 
 export const URLParamsForUser = {
-    //q: '',
+    q: '',
     filter: '',
     search_fields: '',
     highlights: true,

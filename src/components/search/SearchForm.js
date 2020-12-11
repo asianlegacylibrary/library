@@ -1,9 +1,9 @@
 import '../../assets/css/Search.scss'
-import { Button } from '@material-ui/core'
+import { Button, Input } from '@material-ui/core'
 import React from 'react'
 import { fetchResultsAction, resetURLParams } from '../../store/actions'
 import { connect } from 'react-redux'
-import { SearchBar } from './index'
+//import { SearchBar } from './index'
 import { withRouter } from 'react-router-dom'
 import { constants } from '../../store/types'
 import { URLParamsForUser, URLParamsPlaceholders } from '../../store/statics'
@@ -122,11 +122,25 @@ class SearchForm_PreConnect extends React.Component {
         let resultsReceived = this.props.total > 0 ? true : false
         return (
             <div className='search-container'>
-                <SearchBar
-                    value={this.state.params.q}
-                    handleChange={this.handleInputChange}
-                    handleNewSearch={this.updateSearchBarQuery}
-                />
+                <div className='search-bar'>
+                    <Input
+                        name='q'
+                        className='MuiInput-root'
+                        spellCheck='false'
+                        autoCapitalize='false'
+                        autoCorrect='false'
+                        autoComplete='false'
+                        autoFocus
+                        type='text'
+                        value={this.state.params.q}
+                        onChange={(e) => this.handleInputChange(e)}
+                        onKeyDown={(e) =>
+                            e.key === 'Enter'
+                                ? this.updateSearchBarQuery(e)
+                                : null
+                        }
+                    />
+                </div>
                 <div className='search-controls'>
                     <div
                         className={`results-total ${
