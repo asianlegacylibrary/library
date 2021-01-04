@@ -143,7 +143,7 @@ export function ResultCard({ data }) {
                     </span>
 
                     <span className='boldy'>ID: </span>
-                    <span> {_id} </span>
+                    <span className='boldy'>{_id} </span>
                 </div>
                 {h ? <div className='card-highlights'>{h}</div> : null}
                 {/* {remain ? (
