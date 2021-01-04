@@ -22,7 +22,6 @@ function buildHighlights(highlights, source) {
         (item) => item in source && !(item in highlights)
     )
 
-    let vArr = []
     //let remainingDisplayFields = fieldMapping
 
     Object.entries(highlights).forEach(([key, v]) => {
@@ -35,7 +34,7 @@ function buildHighlights(highlights, source) {
 
         // map fields to proper display names *** currently off
         //if (key in fieldMapping) key = fieldMapping[key]
-
+        let vArr = []
         // for now just push first author in array to display
         if (key.toLowerCase().includes('author')) {
             vArr.push(
@@ -50,19 +49,20 @@ function buildHighlights(highlights, source) {
                 </React.Fragment>
             )
         } else {
-            v.forEach((a, i) => {
-                vArr.push(
-                    <React.Fragment key={`${key}_${i}`}>
-                        <span
-                            dangerouslySetInnerHTML={{
-                                __html: a
-                            }}
-                        />
-                        <br />
-                        <br />
-                    </React.Fragment>
-                )
-            })
+            console.log(v)
+            v = v.join(' ')
+            console.log(key, v)
+            //v.forEach((a, i) => {
+            vArr.push(
+                <React.Fragment key={key}>
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: v
+                        }}
+                    />
+                </React.Fragment>
+            )
+            //})
         }
 
         if (mainDisplayFields.includes(key)) {

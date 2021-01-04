@@ -70,21 +70,21 @@ function buildAuthor(source) {
 
 const buildDetails = (result) => {
     let meta = []
-    let author = []
+    //let author = []
     let title = []
     let colophon = []
-    const checkLoc = (result, key) => {
-        let type = ''
-        if ('highlight' in result && result.highlight[key]) {
-            type = 'highlight'
-        } else if (result._source[key]) {
-            type = '_source'
-        }
-        return type
-    }
+    // const checkLoc = (result, key) => {
+    //     let type = ''
+    //     if ('highlight' in result && result.highlight[key]) {
+    //         type = 'highlight'
+    //     } else if (result._source[key]) {
+    //         type = '_source'
+    //     }
+    //     return type
+    // }
     modelKeys.meta.forEach((key, i) => {
-        let type = checkLoc(result, key)
-        if (type.length > 0) {
+        //let type = checkLoc(result, key)
+        if (key in result._source) {
             meta.push(
                 <React.Fragment key={i}>
                     <span className='span-title'>{key}: </span>
@@ -98,31 +98,17 @@ const buildDetails = (result) => {
             )
         }
     })
-    // modelKeys.author.forEach((key, i) => {
-    //     let type = checkLoc(result, key)
-    //     if (type.length > 0) {
-    //         author.push(
-    //             <p key={i} className='author-item flow-text'>
-    //                 <span className='span-title'>{key}</span>
-    //                 <span
-    //                     dangerouslySetInnerHTML={{
-    //                         __html: result[type][key]
-    //                     }}
-    //                 />
-    //             </p>
-    //         )
-    //     }
-    // })
 
     modelKeys.title.forEach((key, i) => {
-        let type = checkLoc(result, key)
-        if (type.length > 0) {
+        //let type = checkLoc(result, key)
+        if (key in result._source) {
             title.push(
                 <p key={i} className='author-item flow-text'>
                     <span className='span-title'>{key}: </span>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: result[type][key]
+                            //__html: result[type][key]
+                            __html: result._source[key]
                         }}
                     />
                 </p>
@@ -130,26 +116,27 @@ const buildDetails = (result) => {
         }
     })
     if (result._source.colophon && result._source.colophon.length > 0) {
-        let type = checkLoc(result, 'colophon')
-        if (type.length > 0) {
-            colophon.push(
-                <p key='colophon' className='author-item flow-text'>
-                    <span className='span-title'>COLOPHON: </span>
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: result[type].colophon
-                        }}
-                    />
-                </p>
-            )
-        }
+        //let type = checkLoc(result, 'colophon')
+        //if (key in result._source) {
+        colophon.push(
+            <p key='colophon' className='author-item flow-text'>
+                <span className='span-title'>COLOPHON: </span>
+                <span
+                    dangerouslySetInnerHTML={{
+                        //__html: result[type].colophon
+                        __html: result._source.colophon
+                    }}
+                />
+            </p>
+        )
+        //}
     }
 
-    return { meta, author, title, colophon }
+    return { meta, title, colophon }
 }
 
 export function CardDetails({ data }) {
-    const { meta, author, title, colophon } = buildDetails(data)
+    const { meta, title, colophon } = buildDetails(data)
 
     let a = rootFields.author in data._source ? buildAuthor(data._source) : null
 
