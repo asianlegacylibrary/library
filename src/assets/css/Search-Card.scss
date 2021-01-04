@@ -1,3 +1,4 @@
+@import './variables.scss';
 .card-meta {
     font-size: 0.8rem;
     letter-spacing: 0.04rem;
@@ -13,18 +14,91 @@
 .span-title {
     text-transform: uppercase;
     font-size: 0.8rem;
-    font-weight: bold;
+
+    font-family: 'Quicksand';
+    letter-spacing: 0.02rem;
     padding-right: var(--padding-sub-container);
 }
 .author-data,
 .subject-data {
-    background-color: #eee;
+    background-color: #ebebeb;
     padding: 0.4em;
     margin: 0.2em;
+    border: 1px dashed;
 }
 .author-variants,
 .subject-variants {
     margin-right: 5px;
     display: block;
     text-indent: 10px;
+}
+
+.more-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 400ms ease-out, opacity 300ms ease-out;
+}
+
+.make-visible {
+    opacity: 1;
+    max-height: 400vh;
+    overflow-y: hidden;
+    transition: max-height 500ms ease-in, opacity 600ms ease-in;
+}
+
+.card .card-content,
+.card .card-action {
+    padding: 18px;
+    a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):not(.disabled) {
+        color: $c-gold-dark;
+    }
+    a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):not(.disabled):hover {
+        color: $c-gold;
+    }
+}
+
+.meta-items {
+    margin: 1em 0;
+}
+.meta-item {
+    margin: 0;
+    font-size: 0.8em;
+}
+.meta-collection {
+    //background-color controlled in component based on content
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-right: 0.5em;
+    line-height: 1.4em;
+    padding: 0.3em 0.16em 0.3em 0.3em;
+    //color: white;
+    //border: 1px solid var(--color-blue);
+}
+.maintitle {
+    //Sfont-size: 1.2rem;
+}
+.col-gold {
+    background-color: rgba($color: $c-green-dark, $alpha: 0.9);
+}
+.col-blue {
+    background-color: rgba($color: $c-blue, $alpha: 0.8);
+}
+.col-red {
+    background-color: rgba($color: $c-red, $alpha: 0.5);
+}
+.favorites-active,
+.text-active {
+    -webkit-text-stroke-width: 1px;
+    // -webkit-text-stroke-color: $c-gold-dark;
+    color: $c-red;
+}
+.full-text-selection {
+    color: $c-gold-dark;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    &:hover {
+        color: $c-blue-darker;
+    }
 }

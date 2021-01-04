@@ -18,9 +18,12 @@ export const actions = {
     ERROR_RESULTS: 'ERROR_RESULTS',
     SET_SEARCH_TERM: 'SET_SEARCH_TERM',
     SET_URL_PARAMS: 'SET_URL_PARAMS',
-    RESET_URL_PARAMS: 'RESET_URL_PARAMS'
+    RESET_URL_PARAMS: 'RESET_URL_PARAMS',
+    PAGE_UP: 'PAGE_UP',
+    PAGE_DOWN: 'PAGE_DOWN'
 }
 
 export const constants = {
-    searchUrlBase: 'search'
+    searchUrlBase: 'search',
+    elasticDefaultResultSize: 10
 }

@@ -35,7 +35,6 @@ class SearchForm_PreConnect extends React.Component {
         }
 
         if (Object.keys(locationParams).length > 0) {
-            console.log()
             this.setState(
                 (prevState) => ({
                     params: {
@@ -43,14 +42,8 @@ class SearchForm_PreConnect extends React.Component {
                         filter: locationParams.filter,
                         search_fields: locationParams.search_fields,
                         q: locationParams.q,
-                        page_size: isNaN(parseInt(locationParams.page_size))
-                            ? constants.elasticDefaultResultSize
-                            : parseInt(locationParams.page_size),
-                        page:
-                            locationParams.page === '' ||
-                            isNaN(parseInt(locationParams.page))
-                                ? 1
-                                : parseInt(locationParams.page),
+                        page_size: locationParams.page_size,
+                        page: locationParams.page,
                         highlights: locationParams.highlights,
                         class: locationParams.class
                     }
@@ -98,48 +91,33 @@ class SearchForm_PreConnect extends React.Component {
         })
     }
 
-    handlePrev = (e) => {
-        e.preventDefault()
-
-        let { page } = this.props.URLParams
-        if (parseInt(page) > 1) {
-            this.setState(
-                (prevState) => ({
-                    params: {
-                        ...prevState.params,
-                        page: parseInt(prevState.params.page) - 1
-                    }
-                }),
-                () => {
-                    console.log(this.state.params.page)
-                    this.initializeSearch(this.state.params, 'initialize')
-                }
-            )
+    handlePrev = () => {
+        console.log('prev')
+        let { page, page_size } = this.props.URLParams
+        if (parseInt(page) * parseInt(page_size) - parseInt(page_size) >= 0) {
+            this.props.pageDown()
+            // search with offset
+        } else {
+            //this.props.setOffsets(this.props.searchTypeDisplay, 0)
         }
-        e.stopPropagation()
     }
 
-    handleNext = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        let { page, page_size } = this.state.params
+    handleNext = () => {
+        console.log('next')
+        let { page, page_size } = this.props.URLParams
+        let newPage = parseInt(page)
         if (this.props.total > parseInt(page) * parseInt(page_size)) {
-            this.setState(
-                (prevState) => ({
-                    params: {
-                        ...prevState.params,
-                        page: parseInt(prevState.params.page) + 1
-                    }
-                }),
-                () => {
-                    this.initializeSearch(this.state.params, 'initialize')
-                }
-            )
+            this.props.pageUp()
+            //search with offset
+        } else {
+            //this.props.setOffsets(this.props.searchTypeDisplay, 0)
         }
+        console.log('next', page, newPage)
     }
 
     buildSearchParams = () => {
         return Object.keys(this.state.params).map((k) => {
+            //return Object.keys(this.props.URLParams).map((k) => {
             // don't return Q, that's the search bar
             if (k === 'q') return null
             return (
@@ -170,31 +148,9 @@ class SearchForm_PreConnect extends React.Component {
         })
     }
 
-    getPaginationMsg = () => {
-        let total = this.props.total
-        let { page, page_size } = this.state.params
-
-        let pageRecord = parseInt(page) * parseInt(page_size)
-        let endRecord = pageRecord < total ? pageRecord : total
-        let startRecord = pageRecord - parseInt(page_size) + 1
-
-        let msg =
-            total > 0
-                ? `Showing <span className="boldy">${startRecord} to ${endRecord} </span> of ${total}`
-                : `&nbsp;`
-
-        return msg
-    }
-
     render() {
-        const { params } = this.state
-        const { total } = this.props
-
         let p = this.buildSearchParams()
-        let resultsReceived = total > 0 ? true : false
-
-        //let paginationMsg = this.getPaginationMsg()
-
+        let resultsReceived = this.props.total > 0 ? true : false
         return (
             <div className='search-container'>
                 <div className='search-bar'>
@@ -207,7 +163,7 @@ class SearchForm_PreConnect extends React.Component {
                         autoComplete='false'
                         autoFocus
                         type='text'
-                        value={params.q}
+                        value={this.state.params.q}
                         onChange={(e) => this.handleInputChange(e)}
                         onKeyDown={(e) =>
                             e.key === 'Enter'
@@ -221,7 +177,7 @@ class SearchForm_PreConnect extends React.Component {
                         className={`results-total ${
                             resultsReceived ? 'more-than-zero' : ''
                         }`}
-                    >{`Results: ${total}`}</div>
+                    >{`Results: ${this.props.total}`}</div>
 
                     <div className='url-params'>
                         <p>{p}</p>
@@ -249,34 +205,27 @@ class SearchForm_PreConnect extends React.Component {
                     </Button> */}
                 <div className='result-pagination'>
                     <Button
-                        variant='outlined'
-                        color='primary'
                         className='waves-effect waves-light btn'
-                        disabled={params.page <= 1}
+                        disabled={false}
                         onClick={this.handlePrev}
                     >
                         PREV
                     </Button>
 
                     <Button
-                        variant='outlined'
-                        color='primary'
                         className='waves-effect waves-light btn'
-                        disabled={
-                            total <
-                            parseInt(params.page) * parseInt(params.page_size)
-                        }
-                        onClick={(e) => this.handleNext(e)}
+                        disabled={false}
+                        onClick={this.handleNext}
                     >
                         NEXT
                     </Button>
                 </div>
-                <div
-                    className='result-pagination-msg'
-                    dangerouslySetInnerHTML={{
-                        __html: this.getPaginationMsg()
-                    }}
-                />
+                {/* <div
+                        className="result-pagination-msg"
+                        dangerouslySetInnerHTML={{
+                            __html: paginationMsg,
+                        }}
+                    /> */}
             </div>
         )
     }

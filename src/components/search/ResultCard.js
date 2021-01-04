@@ -1,35 +1,45 @@
+import { Button } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
-//import CardActions from '@material-ui/core/CardActions'
+import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import '../../assets/css/mui/Card.scss'
+import '../../assets/css/mui/Button.scss'
 import '../../assets/css/Search-Card.scss'
-import { mainDisplayFields, rootFields } from '../../store/statics'
+import { mainDisplayFields } from '../../store/statics'
 
-import React from 'react'
+import { CardDetails } from './CardDetails'
+
+import React, { useState } from 'react'
+import { collections } from '../../store/statics'
 
 //const hlt_keys = ['author-tibetan', 'title-tibetan', 'colophon']
 
 // build from the highlights returned if any
-function buildHighlights(highlights) {
+function buildHighlights(highlights, source) {
     let b = []
-    let display = mainDisplayFields
+    //let display = mainDisplayFields
+    let display = mainDisplayFields.filter(
+        (item) => item in source && !(item in highlights)
+    )
+
+    let vArr = []
     //let remainingDisplayFields = fieldMapping
+
     Object.entries(highlights).forEach(([key, v]) => {
         // temp to take out experimental text analysis field
         if (key.includes('.with_payloads')) return
         // check highlight against main display fields
         // and delete main display fields already included in highlights
-        if (mainDisplayFields.includes(key))
-            display = display.filter((item) => item !== key)
+        // if (mainDisplayFields.includes(key))
+        //     display = display.filter((item) => item !== key)
 
         // map fields to proper display names *** currently off
         //if (key in fieldMapping) key = fieldMapping[key]
 
-        let vArr = []
         // for now just push first author in array to display
         if (key.toLowerCase().includes('author')) {
             vArr.push(
-                <React.Fragment key={0}>
+                <React.Fragment>
                     <span
                         dangerouslySetInnerHTML={{
                             __html: v[0]
@@ -42,7 +52,7 @@ function buildHighlights(highlights) {
         } else {
             v.forEach((a, i) => {
                 vArr.push(
-                    <React.Fragment key={i}>
+                    <React.Fragment key={`${key}_${i}`}>
                         <span
                             dangerouslySetInnerHTML={{
                                 __html: a
@@ -55,128 +65,109 @@ function buildHighlights(highlights) {
             })
         }
 
-        b.push(
-            <div key={key}>
-                <span className='span-title'>{key}</span>
-                {vArr}
+        if (mainDisplayFields.includes(key)) {
+            b.unshift(
+                <div key={key} className='main-field'>
+                    <span className='span-title'>{key}: </span>
+                    {vArr}
+                </div>
+            )
+        } else {
+            b.push(
+                <div key={key}>
+                    <span className='span-title'>{key}: </span>
+                    {vArr}
+                </div>
+            )
+        }
+    })
+
+    if (display.length > 0) {
+        let mainFields = []
+        display.sort().forEach((item) => {
+            mainFields.push(
+                <div key={item} className='main-field'>
+                    <span className='span-title'>{item}: </span>
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: source[item]
+                        }}
+                    />
+                    <br />
+                    <br />
+                </div>
+            )
+        })
+        b.unshift(
+            <div key='main-fields' className='main-fields'>
+                {mainFields}
             </div>
         )
-    })
-    return [b, display]
-}
+    }
 
-function buildNestedData(source, type) {
-    let nestedType = Object.entries(source[rootFields[type]][0]).map(
-        ([k, v]) => {
-            if (v != null) {
-                let subV = []
-                if (Array.isArray(v)) {
-                    subV = v.map((a, i) => {
-                        return (
-                            <span key={i} className={`${type}-variants`}>
-                                {a}
-                            </span>
-                        )
-                    })
-                } else {
-                    subV = v
-                }
-                return (
-                    <div key={k}>
-                        <span className='span-title'>{k}</span>
-                        {subV}
-                    </div>
-                )
-            }
-            return null
-        }
-    )
-
-    return (
-        <div key={type} className={`${type}-data`}>
-            {nestedType}
-        </div>
-    )
-}
-
-function buildAuthor(source) {
-    let author = Object.entries(source[rootFields.author][0]).map(([k, v]) => {
-        if (v != null) {
-            let subV = []
-            if (Array.isArray(v)) {
-                subV = v.map((a, i) => {
-                    return (
-                        <span key={i} className='author-variants'>
-                            {a}
-                        </span>
-                    )
-                })
-            } else {
-                subV = v
-            }
-            return (
-                <div key={k}>
-                    <span className='span-title'>{k}</span>
-                    {subV}
-                </div>
-            )
-        }
-        return null
-    })
-
-    return (
-        <div key='authors' className='author-data'>
-            {author}
-        </div>
-    )
-}
-
-// remaining function required so we don't display the highlight fields twice (from source and highlight)
-function buildRemaining(source, remaining) {
-    let r = []
-    Object.entries(source).forEach(([k, v]) => {
-        if (k.includes('.with_payloads')) return
-        //if (k.includes('colophon')) console.log('meow?')
-        //console.log(k, v, remaining)
-
-        let a = k === rootFields.author ? buildAuthor(source) : null
-
-        let s =
-            k === rootFields.subject ? buildNestedData(source, 'subject') : null
-
-        r.push(a)
-        r.push(s)
-
-        if (remaining.includes(k)) {
-            let value = Array.isArray(v) ? v[0] : v
-            r.push(
-                <div key={k}>
-                    <span className='span-title'>{k}</span>
-                    {value}
-                </div>
-            )
-        }
-    })
-    return r
+    return b
 }
 
 export function ResultCard({ data }) {
     const { _id, highlight, _source } = data
 
-    let [h, remaining] =
-        highlight == null ? [null, null] : buildHighlights(highlight)
+    let h = highlight == null ? null : buildHighlights(highlight, _source)
+
     //console.log('remaining!', remaining)
-    const remain = remaining == null ? null : buildRemaining(_source, remaining)
+    // const remain =
+    //     remaining == null ? null : buildRemaining(data._source, remaining)
+
+    // Declare a new state variable, which we'll call "count"
+    const [isActive, setIsActive] = useState(false)
+    const toggle = () => setIsActive(!isActive)
+    const activatedDetails = isActive ? 'make-visible' : ''
+
+    const coll = Object.keys(collections).find(
+        (c) => _source['bibframe:collection'] === c
+    )
+
+    console.log(collections[coll].color)
 
     return (
-        <Card className='MuiCard-root' square={true} elevation={0}>
+        <Card className='MuiCard-root' square={true} elevation={1}>
             <CardContent>
-                <div className='card-meta'>{_id}</div>
+                <div className='result-meta'>
+                    <span
+                        className='meta-collection'
+                        style={{
+                            border: `1px solid var(--col-neutral)`
+                        }}
+                    >
+                        {collections[coll].desc.toUpperCase()}
+                        {'    '}
+                    </span>
+
+                    <span className='boldy'>ID: </span>
+                    <span> {_id} </span>
+                </div>
                 {h ? <div className='card-highlights'>{h}</div> : null}
-                {remain ? (
+                {/* {remain ? (
                     <div className='card-highlights'>{remain}</div>
-                ) : null}
+                ) : null} */}
             </CardContent>
+            <CardActions>
+                <Button onClick={toggle} size='small' color='primary'>
+                    {isActive ? 'Hide Details' : 'Show Details'}
+                </Button>
+                {/* <a
+                    href='#!'
+                    onClick={(e) => this.handleFavorites(result, e)}
+                    className='favorites right'
+                >
+                    <i className={`fa fa-star fa-lg ${activatedFavorite}`} />
+                </a> */}
+
+                <div
+                    className={`more-content ${activatedDetails} blue-grey-text darken-4`}
+                >
+                    <CardDetails data={data} />
+                </div>
+            </CardActions>
         </Card>
     )
 }

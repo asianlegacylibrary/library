@@ -25,6 +25,17 @@ export default (state = initialState.URLParams, action) => {
                 ...initialState.URLParams,
                 ...action.payload
             }
+        case actions.PAGE_UP:
+            return {
+                ...state,
+                page: ++state.page
+            }
+
+        case actions.PAGE_DOWN:
+            return {
+                ...state,
+                page: --state.page
+            }
         default:
             return state
     }

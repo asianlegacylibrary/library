@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+.tabs .tab a.active {
+    background-color: rgba(246, 178, 181, 0.2);
+}
+.tabs .tab a:hover {
+    background-color: rgba(246, 178, 181, 0.4);
+}
+
+em {
+    background-color: var(--color-highlight);
+    &.hlt1 {
+        background-color: var(--color-highlight);
+    }
+    &.hlt2 {
+        background-color: goldenrod;
+    }
+}
+
+h4,
+h5 {
+    font-family: 'Noto Serif', serif;
+}
+
+hr {
+    //color: var(--bg-color);
+    border: 1px var(--bg-color) solid;
+}

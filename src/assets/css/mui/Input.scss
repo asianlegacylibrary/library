@@ -1,9 +1,13 @@
 .MuiInputBase-root {
     font-size: 1.4rem;
     font-family: var(--font-family);
-    background-color: aliceblue;
+    background-color: var(--bg-color);
     width: 100%;
     padding-left: var(--padding-container);
+}
+
+.MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid var(--color-blue);
 }
 
 /* laptops */

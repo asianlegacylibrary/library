@@ -20,3 +20,15 @@ export const resetURLParams = (payload) => {
         payload: payload
     }
 }
+
+export const pageUp = () => {
+    return {
+        type: actions.PAGE_UP
+    }
+}
+
+export const pageDown = () => {
+    return {
+        type: actions.PAGE_DOWN
+    }
+}

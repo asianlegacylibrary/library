@@ -1,13 +1,38 @@
+// 11. Global
+// ==========================================================================
+
+// Media Query Ranges
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$small-screen: 600px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default;
+
+$medium-and-up: 'only screen and (min-width : #{$small-screen-up})' !default;
+$large-and-up: 'only screen and (min-width : #{$medium-screen-up})' !default;
+$extra-large-and-up: 'only screen and (min-width : #{$large-screen-up})' !default;
+$small-and-down: 'only screen and (max-width : #{$small-screen})' !default;
+$medium-and-down: 'only screen and (max-width : #{$medium-screen})' !default;
+$medium-only: 'only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})' !default;
+
 :root {
-    --bg-color: #efefef;
+    --bg-color: #ececec;
     --color: rgba(48, 48, 48, 0.9);
+    //--color-blue: #607d8b;
+    --color-blue: #282c34;
     --color-subtitle: #888;
     --color-highlight: #faef7285;
-    --font-family: 'Segoe UI', sans-serif;
+    --font-family: 'Open Sans', 'Quicksand', 'Segoe UI', sans-serif;
     --padding-container: 1rem;
     --padding-sub-container: 0.2rem;
     --margin-sub-container: 0.2rem;
     --width-break-laptop: 80%;
+    --col-red: rgba(255, 22, 22, 0.411);
+    --col-gold: rgba(255, 213, 73, 0.548);
+    --col-green: rgba(158, 248, 85, 0.541);
+    --col-blue: rgba(22, 150, 255, 0.295);
+    --col-neutral: rgba(22, 22, 22, 0.3);
 }
 
 .header {
@@ -17,3 +42,21 @@
 .search-container {
     --font-family: 'Consolas', sans-serif;
 }
+
+$pad: 1em;
+
+$w-8: 70%;
+$w-9: 75%;
+$w-10: 90%;
+$w-11: 96%;
+
+$c-light: #efefef;
+$c-dark: #303030; // jet
+$c-darker: #232323; // raisin black
+$c-gold: #e2ca51; // sun ray #f0d437;
+$c-gold-dark: #d3bd4c; // old gold // #8f7900;
+$c-green-dark: #7cb339;
+$c-blue: #123d99;
+$c-blue-darker: #525761;
+$c-red: #a70a0a; // coconut
+$c-highlight: #faef7285;

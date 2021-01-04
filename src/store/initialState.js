@@ -4,6 +4,7 @@ export const initialState = {
         results: {
             isFetching: false,
             url: null,
+            offset: 0,
             error: {},
             total: {
                 value: 0
