@@ -41,7 +41,7 @@ function buildHighlights(highlights, source) {
                 <React.Fragment>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: v[0]
+                            __html: v[0].replace(/(\r\n|\n|\r)/gm, '<br>')
                         }}
                     />
                     <br />
@@ -57,7 +57,7 @@ function buildHighlights(highlights, source) {
                 <React.Fragment key={key}>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: v
+                            __html: v.replace(/(\r\n|\n|\r)/gm, '<br>')
                         }}
                     />
                 </React.Fragment>
@@ -90,7 +90,10 @@ function buildHighlights(highlights, source) {
                     <span className='span-title'>{item}: </span>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: source[item]
+                            __html: source[item].replace(
+                                /(\r\n|\n|\r)/gm,
+                                '<br>'
+                            )
                         }}
                     />
                     <br />

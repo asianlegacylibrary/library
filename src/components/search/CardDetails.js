@@ -1,6 +1,6 @@
 import '../../assets/css/Search-Card.scss'
 import React from 'react'
-import { modelKeys, rootFields } from '../../store/statics'
+import { modelKeys, rootFields, colophonField } from '../../store/statics'
 
 function buildNestedData(source, type) {
     let nestedType = Object.entries(source[rootFields[type]][0]).map(
@@ -49,7 +49,13 @@ function buildAuthor(source) {
                     )
                 })
             } else {
-                subV = v
+                subV = (
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: v.replace(/(\r\n|\n|\r)/gm, '<br>')
+                        }}
+                    />
+                )
             }
             return (
                 <div key={k}>
@@ -108,35 +114,22 @@ const buildDetails = (result) => {
                     <span
                         dangerouslySetInnerHTML={{
                             //__html: result[type][key]
-                            __html: result._source[key]
+                            __html: result._source[key].replace(
+                                /(\r\n|\n|\r)/gm,
+                                '<br>'
+                            )
                         }}
                     />
                 </p>
             )
         }
     })
-    if (result._source.colophon && result._source.colophon.length > 0) {
-        //let type = checkLoc(result, 'colophon')
-        //if (key in result._source) {
-        colophon.push(
-            <p key='colophon' className='author-item flow-text'>
-                <span className='span-title'>COLOPHON: </span>
-                <span
-                    dangerouslySetInnerHTML={{
-                        //__html: result[type].colophon
-                        __html: result._source.colophon
-                    }}
-                />
-            </p>
-        )
-        //}
-    }
 
-    return { meta, title, colophon }
+    return { meta, title }
 }
 
 export function CardDetails({ data }) {
-    const { meta, title, colophon } = buildDetails(data)
+    const { meta, title } = buildDetails(data)
 
     let a = rootFields.author in data._source ? buildAuthor(data._source) : null
 
@@ -165,8 +158,6 @@ export function CardDetails({ data }) {
                     {title}
                 </div>
             ) : null}
-
-            {colophon.length > 0 ? colophon : null}
 
             {a !== null ? a : null}
 
