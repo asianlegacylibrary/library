@@ -43,6 +43,15 @@ input:-moz-placeholder {
     visibility: hidden;
 }
 
+.go-right {
+    float: right;
+}
+
+.view-json a {
+    text-decoration: none;
+    color: inherit;
+}
+
 @media only screen and (min-width: 62rem) {
     .background-logo {
         visibility: visible;

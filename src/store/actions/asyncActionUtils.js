@@ -49,11 +49,18 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
             // if (['ID', 'RESULTS'].some((el) => actionType.includes(el))) {
             //     dispatch(clearAction())
             // }
-            if (params) {
-                dispatch(dealWithParameters(params, paramAction))
-            }
+            let response
+
             dispatch(startAction())
-            const response = await asyncFunc(getState().URLParams)
+
+            if (actionType === 'RESULTS') {
+                dispatch(dealWithParameters(params, paramAction))
+                response = await asyncFunc(getState().URLParams)
+            } else if (actionType === 'DETAILS') {
+                console.log(params)
+                response = await asyncFunc(params)
+            }
+
             //console.log(response.status, response.data)
             if (response.status === 200) {
                 dispatch(successAction(response))

@@ -1,3 +1,4 @@
+export const apiUrl = 'https://api.asianlegacylibrary.org/resources'
 export const fieldMapping = {
     'bibframe:maintitle': 'Main Title',
     'bibframe:varianttitle': 'Variant Title',
@@ -87,7 +88,8 @@ export const collections = {
     TG: { desc: 'Tengyur', color: 'col-gold' },
     LDK: { desc: 'Ladakh', color: 'col-blue' },
     MNG: { desc: 'Mongolia', color: 'col-red' },
-    STP: { desc: 'St. Petersburg', color: 'col-gold' }
+    STP: { desc: 'St. Petersburg', color: 'col-gold' },
+    TR: { desc: 'Translations', color: 'col-red' }
 }
 
 export const rootFields = {

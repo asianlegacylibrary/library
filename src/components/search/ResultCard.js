@@ -5,11 +5,13 @@ import CardContent from '@material-ui/core/CardContent'
 import '../../assets/css/mui/Card.scss'
 import '../../assets/css/mui/Button.scss'
 import '../../assets/css/Search-Card.scss'
-import { mainDisplayFields } from '../../store/statics'
+import { mainDisplayFields, apiUrl } from '../../store/statics'
 
 import { CardDetails } from './CardDetails'
 
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import { collections } from '../../store/statics'
 
 //const hlt_keys = ['author-tibetan', 'title-tibetan', 'colophon']
@@ -41,7 +43,9 @@ function buildHighlights(highlights, source) {
                 <React.Fragment>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: v[0].replace(/(\r\n|\n|\r)/gm, '<br>')
+                            __html: v[0]
+                                .replace(/(\r\n|\n|\r)/gm, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
                         }}
                     />
                     <br />
@@ -57,7 +61,9 @@ function buildHighlights(highlights, source) {
                 <React.Fragment key={key}>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: v.replace(/(\r\n|\n|\r)/gm, '<br>')
+                            __html: v
+                                .replace(/(\r\n|\n|\r)/gm, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
                         }}
                     />
                 </React.Fragment>
@@ -90,10 +96,9 @@ function buildHighlights(highlights, source) {
                     <span className='span-title'>{item}: </span>
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: source[item].replace(
-                                /(\r\n|\n|\r)/gm,
-                                '<br>'
-                            )
+                            __html: source[item]
+                                .replace(/(\r\n|\n|\r)/gm, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
                         }}
                     />
                     <br />
@@ -114,22 +119,27 @@ function buildHighlights(highlights, source) {
 export function ResultCard({ data }) {
     const { _id, highlight, _source } = data
 
-    let h = highlight == null ? null : buildHighlights(highlight, _source)
+    const hasItemData = !!_source['all:items']
+    console.log(hasItemData)
 
-    //console.log('remaining!', remaining)
-    // const remain =
-    //     remaining == null ? null : buildRemaining(data._source, remaining)
+    let h = highlight == null ? null : buildHighlights(highlight, _source)
 
     // Declare a new state variable, which we'll call "count"
     const [isActive, setIsActive] = useState(false)
     const toggle = () => setIsActive(!isActive)
+
+    // const openInNewTab = (url) => {
+    //     setDetailsActive(!detailsActive)
+    //     //const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    //     const newWindow = window.open(url)
+    //     if (newWindow) newWindow.opener = null
+    // }
+
     const activatedDetails = isActive ? 'make-visible' : ''
 
     const coll = Object.keys(collections).find(
         (c) => _source['bibframe:collection'] === c
     )
-
-    console.log(collections[coll].color)
 
     return (
         <Card className='MuiCard-root' square={true} elevation={1}>
@@ -141,22 +151,48 @@ export function ResultCard({ data }) {
                             border: `1px solid var(--col-neutral)`
                         }}
                     >
-                        {collections[coll].desc.toUpperCase()}
+                        {!!coll
+                            ? collections[coll].desc.toUpperCase()
+                            : 'UNKNOWN'}
                         {'    '}
                     </span>
 
                     <span className='boldy'>ID: </span>
                     <span className='boldy'>{_id} </span>
+                    <Button
+                        // onClick={() =>
+                        //     openInNewTab(
+                        //         `https://api.asianlegacylibrary.org/resources/${_id}?include_data=true`
+                        //     )
+                        // }
+
+                        size='small'
+                        color='primary'
+                        className='go-right view-json'
+                    >
+                        <a href={`${apiUrl}/${_id}?include_data=true`}>
+                            Open JSON Record
+                        </a>
+                    </Button>
                 </div>
                 {h ? <div className='card-highlights'>{h}</div> : null}
-                {/* {remain ? (
-                    <div className='card-highlights'>{remain}</div>
-                ) : null} */}
             </CardContent>
+
             <CardActions>
                 <Button onClick={toggle} size='small' color='primary'>
-                    {isActive ? 'Hide Details' : 'Show Details'}
+                    {isActive ? 'Hide More...' : 'Show More...'}
                 </Button>
+                {hasItemData ? (
+                    <Button
+                        className='view-json go-right'
+                        onClick={toggle}
+                        size='small'
+                        color='primary'
+                    >
+                        <Link to={`/details/${_id}`}>View Item Record</Link>
+                    </Button>
+                ) : null}
+
                 {/* <a
                     href='#!'
                     onClick={(e) => this.handleFavorites(result, e)}

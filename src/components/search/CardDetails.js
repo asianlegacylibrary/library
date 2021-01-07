@@ -52,7 +52,9 @@ function buildAuthor(source) {
                 subV = (
                     <span
                         dangerouslySetInnerHTML={{
-                            __html: v.replace(/(\r\n|\n|\r)/gm, '<br>')
+                            __html: v
+                                .replace(/(\r\n|\n|\r)/gm, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
                         }}
                     />
                 )
@@ -114,10 +116,9 @@ const buildDetails = (result) => {
                     <span
                         dangerouslySetInnerHTML={{
                             //__html: result[type][key]
-                            __html: result._source[key].replace(
-                                /(\r\n|\n|\r)/gm,
-                                '<br>'
-                            )
+                            __html: result._source[key]
+                                .replace(/(\r\n|\n|\r)/gm, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
                         }}
                     />
                 </p>
@@ -138,7 +139,6 @@ export function CardDetails({ data }) {
             ? buildNestedData(data._source, 'subject')
             : null
 
-    console.log(s)
     return (
         <React.Fragment>
             <div className='meta-items'>

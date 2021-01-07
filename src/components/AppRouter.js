@@ -18,7 +18,17 @@ export function AppRouter() {
                     <SearchForm />
                     <Switch>
                         {/* <Route path={['/', '/results']} children={<SearchBar />} /> */}
-                        <Route path='/search:term?' component={Results} />
+                        <Route
+                            path='/search:term?'
+                            render={() => {
+                                return (
+                                    <React.Fragment>
+                                        {/* could put the search form here...? */}
+                                        <Results />
+                                    </React.Fragment>
+                                )
+                            }}
+                        />
                         <Route path='/details/:id?' component={Details} />
                     </Switch>
                 </div>

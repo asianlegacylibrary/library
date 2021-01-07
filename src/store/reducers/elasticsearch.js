@@ -11,6 +11,14 @@ export default (state = initialState.elasticsearch, action) => {
                     isFetching: true
                 }
             }
+        case actions.REQUEST_DETAILS:
+            return {
+                ...state,
+                details: {
+                    ...state.details,
+                    isFetching: true
+                }
+            }
         case actions.RECEIVE_RESULTS:
             return {
                 ...state,
@@ -19,6 +27,19 @@ export default (state = initialState.elasticsearch, action) => {
                     isFetching: false,
                     url: action.payload.config.url,
                     offset: 0,
+                    data: {
+                        hits: action.payload.data.hits,
+                        total: { value: action.payload.data.total.value },
+                        error: {}
+                    }
+                }
+            }
+        case actions.RECEIVE_DETAILS:
+            return {
+                ...state,
+                details: {
+                    ...state.details,
+                    isFetching: false,
                     data: {
                         hits: action.payload.data.hits,
                         total: { value: action.payload.data.total.value },

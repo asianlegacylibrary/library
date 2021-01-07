@@ -1,6 +1,20 @@
 export const initialState = {
     searchTerm: '',
     elasticsearch: {
+        details: {
+            isFetching: false,
+            total: {
+                value: 0
+            },
+            data: {
+                hits: [],
+                total: {
+                    value: 0
+                },
+                error: {}
+            },
+            error: {}
+        },
         results: {
             isFetching: false,
             url: null,
