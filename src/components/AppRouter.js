@@ -19,7 +19,8 @@ export function AppRouter() {
                     <Switch>
                         {/* <Route path={['/', '/results']} children={<SearchBar />} /> */}
                         <Route
-                            path='/search:term?'
+                            exact
+                            path={['/search:term?', '/search', '/']}
                             //component={Results}
                             render={() => {
                                 return (
