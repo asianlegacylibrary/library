@@ -10,7 +10,7 @@ import { mainDisplayFields, apiUrl } from '../../store/statics'
 import { CardDetails } from './CardDetails'
 
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { collections } from '../../store/statics'
 
@@ -118,6 +118,7 @@ function buildHighlights(highlights, source) {
 
 export function ResultCard({ data }) {
     const { _id, highlight, _source } = data
+    let history = useHistory()
 
     const hasItemData = !!_source['all:items']
     //console.log(hasItemData)
@@ -189,7 +190,14 @@ export function ResultCard({ data }) {
                         size='small'
                         color='primary'
                     >
-                        <Link to={`/details/${_id}`}>View Item Record</Link>
+                        <Link
+                            to={{
+                                pathname: `/details/${_id}`,
+                                state: { from: history.location.pathname }
+                            }}
+                        >
+                            View Item Record
+                        </Link>
                     </Button>
                 ) : null}
 
