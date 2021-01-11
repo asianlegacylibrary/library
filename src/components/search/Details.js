@@ -34,12 +34,6 @@ class Details_PreConnect extends React.Component {
     }
 
     render() {
-        console.log('history from POV of results component', this.props.history)
-        let initialLocation = false
-        if (this.props.history.location.state === undefined) {
-            console.log('make back btn to search')
-            initialLocation = true
-        }
         if (this.props.data.length < 1) {
             return null
         }

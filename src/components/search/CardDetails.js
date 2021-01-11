@@ -1,5 +1,6 @@
 import '../../assets/css/Search-Card.scss'
 import React from 'react'
+import { CardMeta } from './CardMeta'
 import { modelKeys, rootFields, colophonField } from '../../store/statics'
 
 function buildNestedData(source, type) {
@@ -130,8 +131,6 @@ const buildDetails = (result) => {
 }
 
 export function CardDetails({ data }) {
-    const { meta, title } = buildDetails(data)
-
     let a = rootFields.author in data._source ? buildAuthor(data._source) : null
 
     let s =
@@ -141,23 +140,7 @@ export function CardDetails({ data }) {
 
     return (
         <React.Fragment>
-            <div className='meta-items'>
-                <p className='meta-item'>{meta}</p>
-            </div>
-
-            {/* {author.length > 0 ? (
-                <div className='author-items'>
-                    <hr />
-                    {author}
-                </div>
-            ) : null} */}
-
-            {title.length > 0 ? (
-                <div className='title-items'>
-                    <hr />
-                    {title}
-                </div>
-            ) : null}
+            <CardMeta data={data} />
 
             {a !== null ? a : null}
 

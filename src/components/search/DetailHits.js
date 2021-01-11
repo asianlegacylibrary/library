@@ -1,3 +1,5 @@
+import '../../assets/css/Search-Card.scss'
+
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
@@ -5,10 +7,11 @@ import Tab from '@material-ui/core/Tab'
 //import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { Button } from '@material-ui/core'
+import { CardMeta } from './CardMeta'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
-    console.log(props)
+
     return (
         <div
             role='tabpanel'
@@ -43,6 +46,7 @@ export default function SimpleTabs(props) {
 
     let t = []
     let p = []
+    let m = []
 
     data.forEach((d, i) => {
         let id = d._id
@@ -53,8 +57,12 @@ export default function SimpleTabs(props) {
         }
 
         t.push(<Tab key={i} label={label} {...a11yProps(i)} />)
+
         p.push(
             <TabPanel key={i} value={value} index={i}>
+                <div className='details-meta'>
+                    <CardMeta data={d} />
+                </div>
                 <Button
                     variant='outlined'
                     color='primary'
@@ -89,7 +97,7 @@ export default function SimpleTabs(props) {
                     {t}
                 </Tabs>
             </AppBar>
-
+            {m}
             {p}
         </div>
     )
