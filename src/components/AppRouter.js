@@ -15,15 +15,17 @@ export function AppRouter() {
                         alt='main background logo'
                     /> */}
                     <Header />
-                    <SearchForm />
+                    {/* <SearchForm /> */}
                     <Switch>
                         {/* <Route path={['/', '/results']} children={<SearchBar />} /> */}
                         <Route
                             path='/search:term?'
+                            //component={Results}
                             render={() => {
                                 return (
                                     <React.Fragment>
                                         {/* could put the search form here...? */}
+                                        <SearchForm />
                                         <Results />
                                     </React.Fragment>
                                 )

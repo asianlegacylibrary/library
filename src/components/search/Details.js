@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fetchDetailsAction } from '../../store/actions'
 import DetailHits from './DetailHits'
+import { BackButton } from '../ButtonBack'
 
 class Details_PreConnect extends React.Component {
     state = {
@@ -24,19 +25,33 @@ class Details_PreConnect extends React.Component {
         }
     }
 
+    handleLocation = (initialLocation) => {
+        if (initialLocation) {
+            this.props.history.push('/search')
+        } else {
+            this.props.history.goBack()
+        }
+    }
+
     render() {
+        console.log('history from POV of results component', this.props.history)
+        let initialLocation = false
+        if (this.props.history.location.state === undefined) {
+            console.log('make back btn to search')
+            initialLocation = true
+        }
         if (this.props.data.length < 1) {
             return null
         }
         return (
             <div className='search-results'>
+                {/* <Button onClick={this.handleLocation}>Back To Search</Button> */}
+                <BackButton>Back To Search</BackButton>
                 <Card className='MuiCard-root' square={true} elevation={1}>
-                    <CardActions>
-                        <Button onClick={this.props.history.goBack}>
-                            Back To Search
-                        </Button>
-                    </CardActions>
-                    <CardContent>
+                    {/* <CardActions>
+                        
+                    </CardActions> */}
+                    <CardContent className='detail-hits'>
                         <DetailHits
                             data={this.props.data}
                             total={this.props.total}

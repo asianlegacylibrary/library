@@ -22,13 +22,15 @@ export function Results() {
 
     if (Object.keys(results.data.error).length > 0) {
         return (
-            <div className='search-results'>
+            <div key='results' className='search-results'>
                 <Card className='MuiCard-root' square={true} elevation={0}>
                     <CardContent>{results.data.error.errorStatus}</CardContent>
                 </Card>
             </div>
         )
     }
+
+    // add check to see if results need to be reloaded (search re-initialized)
 
     r = results.data.hits.map((r, i) => {
         return <ResultCard key={i} data={r} />

@@ -53,9 +53,9 @@ function buildHighlights(highlights, source) {
                 </React.Fragment>
             )
         } else {
-            console.log(v)
+            //console.log(v)
             v = v.join(' ')
-            console.log(key, v)
+            //console.log(key, v)
             //v.forEach((a, i) => {
             vArr.push(
                 <React.Fragment key={key}>
@@ -120,7 +120,7 @@ export function ResultCard({ data }) {
     const { _id, highlight, _source } = data
 
     const hasItemData = !!_source['all:items']
-    console.log(hasItemData)
+    //console.log(hasItemData)
 
     let h = highlight == null ? null : buildHighlights(highlight, _source)
 

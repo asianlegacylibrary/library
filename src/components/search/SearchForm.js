@@ -23,10 +23,11 @@ class SearchForm_PreConnect extends React.Component {
     componentDidMount = () => {
         // check for url params on mount, add to state
         //let q = new URLSearchParams(this.props.location.search).get('q')
+        this.handleUrlParams(this.props.location.search)
+    }
 
-        let locationParams = Object.fromEntries(
-            new URLSearchParams(this.props.location.search)
-        )
+    handleUrlParams = (params) => {
+        let locationParams = Object.fromEntries(new URLSearchParams(params))
 
         if (typeof window !== 'undefined') {
             this.setState({
@@ -82,6 +83,7 @@ class SearchForm_PreConnect extends React.Component {
     }
 
     updateSearchBarQuery = () => {
+        console.log('update search bar?')
         this.initializeSearch(this.state.params, 'reset')
     }
 
@@ -93,7 +95,8 @@ class SearchForm_PreConnect extends React.Component {
         this.props.history.push({
             //pathname: `/${url}?q=${param}`,
             pathname: pathName,
-            state: u
+            state: u,
+            from: this.props.location.pathname
             //search: u
         })
     }
