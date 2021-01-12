@@ -1,7 +1,7 @@
 import '../../assets/css/Search-Card.scss'
 import React from 'react'
 import { CardMeta } from './CardMeta'
-import { modelKeys, rootFields, colophonField } from '../../store/statics'
+import { rootFields } from '../../store/statics'
 
 function buildNestedData(source, type) {
     let nestedType = Object.entries(source[rootFields[type]][0]).map(
@@ -75,59 +75,6 @@ function buildAuthor(source) {
             {author}
         </div>
     )
-}
-
-const buildDetails = (result) => {
-    let meta = []
-    //let author = []
-    let title = []
-    let colophon = []
-    // const checkLoc = (result, key) => {
-    //     let type = ''
-    //     if ('highlight' in result && result.highlight[key]) {
-    //         type = 'highlight'
-    //     } else if (result._source[key]) {
-    //         type = '_source'
-    //     }
-    //     return type
-    // }
-    modelKeys.meta.forEach((key, i) => {
-        //let type = checkLoc(result, key)
-        if (key in result._source) {
-            meta.push(
-                <React.Fragment key={i}>
-                    <span className='span-title'>{key}: </span>
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: result._source[key]
-                        }}
-                    />
-                    <br />
-                </React.Fragment>
-            )
-        }
-    })
-
-    modelKeys.title.forEach((key, i) => {
-        //let type = checkLoc(result, key)
-        if (key in result._source) {
-            title.push(
-                <p key={i} className='author-item flow-text'>
-                    <span className='span-title'>{key}: </span>
-                    <span
-                        dangerouslySetInnerHTML={{
-                            //__html: result[type][key]
-                            __html: result._source[key]
-                                .replace(/(\r\n|\n|\r)/gm, '<br>')
-                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
-                        }}
-                    />
-                </p>
-            )
-        }
-    })
-
-    return { meta, title }
 }
 
 export function CardDetails({ data }) {

@@ -1,4 +1,5 @@
 export const initialState = {
+    //initialRender: true,
     searchTerm: '',
     elasticsearch: {
         details: {

@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab'
 import Box from '@material-ui/core/Box'
 import { Button } from '@material-ui/core'
 import { CardMeta } from './CardMeta'
+import { personField } from '../../store/statics'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -46,7 +47,7 @@ export default function SimpleTabs(props) {
 
     let t = []
     let p = []
-    let m = []
+    let author = []
 
     data.forEach((d, i) => {
         let id = d._id
@@ -62,6 +63,16 @@ export default function SimpleTabs(props) {
             <TabPanel key={i} value={value} index={i}>
                 <div className='details-meta'>
                     <CardMeta data={d} />
+                    {d._source[personField] ? (
+                        <React.Fragment key={i}>
+                            <span className='span-title'>{personField}: </span>
+                            <span
+                                dangerouslySetInnerHTML={{
+                                    __html: d._source[personField]
+                                }}
+                            />
+                        </React.Fragment>
+                    ) : null}
                 </div>
                 <Button
                     variant='outlined'
@@ -97,7 +108,7 @@ export default function SimpleTabs(props) {
                     {t}
                 </Tabs>
             </AppBar>
-            {m}
+
             {p}
         </div>
     )

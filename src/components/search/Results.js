@@ -11,21 +11,13 @@ export function Results() {
     let r = []
 
     if (results.isFetching) {
-        return (
-            <div className='search-results'>
-                <Card className='MuiCard-root' square={true} elevation={0}>
-                    SEARCHING
-                </Card>
-            </div>
-        )
+        return <div className='search-results'>SEARCHING...</div>
     }
 
     if (Object.keys(results.data.error).length > 0) {
         return (
             <div key='results' className='search-results'>
-                <Card className='MuiCard-root' square={true} elevation={0}>
-                    <CardContent>{results.data.error.errorStatus}</CardContent>
-                </Card>
+                <CardContent>{results.data.error.errorStatus}</CardContent>
             </div>
         )
     }

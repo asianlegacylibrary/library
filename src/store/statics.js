@@ -28,6 +28,7 @@ export const mainDisplayFields = [
 export const mainTitleField = 'bibframe:maintitle'
 export const mainTitleEngField = 'bibframe:varianttitle@eng'
 export const colophonField = 'bibframe:varianttitle@colophon'
+export const personField = 'bibframe:person'
 
 export const modelKeys = {
     author: [

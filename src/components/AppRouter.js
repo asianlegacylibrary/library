@@ -32,7 +32,13 @@ export function AppRouter() {
                                 )
                             }}
                         />
-                        <Route path='/details/:id?' component={Details} />
+                        {/* <Route path='/details/:id?' component={Details} /> */}
+                        <Route
+                            path='/details/:id?'
+                            render={() => {
+                                return <Details />
+                            }}
+                        />
                     </Switch>
                 </div>
             </StylesProvider>

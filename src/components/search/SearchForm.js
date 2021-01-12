@@ -51,9 +51,9 @@ class SearchForm_PreConnect extends React.Component {
                             locationParams.page === '' ||
                             isNaN(parseInt(locationParams.page))
                                 ? 1
-                                : parseInt(locationParams.page),
-                        highlights: locationParams.highlights,
-                        class: locationParams.class
+                                : parseInt(locationParams.page)
+                        //highlights: locationParams.highlights
+                        //class: locationParams.class
                     }
                 }),
                 () => {
@@ -125,7 +125,8 @@ class SearchForm_PreConnect extends React.Component {
     handleNext = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        let { page, page_size } = this.state.params
+        // let { page, page_size } = this.state.params
+        let { page, page_size } = this.props.URLParams
         if (this.props.total > parseInt(page) * parseInt(page_size)) {
             this.setState(
                 (prevState) => ({
@@ -142,40 +143,46 @@ class SearchForm_PreConnect extends React.Component {
     }
 
     buildSearchParams = () => {
-        return Object.keys(this.state.params).map((k) => {
-            // don't return Q, that's the search bar
-            if (k === 'q') return null
-            return (
-                <span key={k}>
-                    <label htmlFor={k}>{`${this.state.placeholders[
+        return Object.keys(this.state.params)
+            .filter(
+                (k) =>
+                    !['q', 'page', 'page_size', 'highlights', 'class'].includes(
                         k
-                    ].name.toUpperCase()}: `}</label>
-                    <input
-                        name={k}
-                        className='param-filter'
-                        spellCheck='false'
-                        autoCapitalize='false'
-                        autoCorrect='false'
-                        autoComplete='false'
-                        type='text'
-                        placeholder={this.state.placeholders[k].value}
-                        value={this.state.params[k]}
-                        //value={this.props.URLParams[k]}
-                        onChange={(e) => this.handleInputChange(e)}
-                        onKeyDown={(e) =>
-                            e.key === 'Enter'
-                                ? this.updateSearchBarQuery(e)
-                                : null
-                        }
-                    />
-                </span>
+                    )
             )
-        })
+            .map((k) => {
+                return (
+                    <span key={k}>
+                        <label htmlFor={k}>{`${this.state.placeholders[
+                            k
+                        ].name.toUpperCase()}: `}</label>
+                        <input
+                            name={k}
+                            className='param-filter'
+                            spellCheck='false'
+                            autoCapitalize='false'
+                            autoCorrect='false'
+                            autoComplete='false'
+                            type='text'
+                            placeholder={this.state.placeholders[k].value}
+                            value={this.state.params[k]}
+                            //value={this.props.URLParams[k]}
+                            onChange={(e) => this.handleInputChange(e)}
+                            onKeyDown={(e) =>
+                                e.key === 'Enter'
+                                    ? this.updateSearchBarQuery(e)
+                                    : null
+                            }
+                        />
+                    </span>
+                )
+            })
     }
 
     getPaginationMsg = () => {
         let total = this.props.total
-        let { page, page_size } = this.state.params
+        //let { page, page_size } = this.state.params
+        let { page, page_size } = this.props.URLParams
 
         let pageRecord = parseInt(page) * parseInt(page_size)
         let endRecord = pageRecord < total ? pageRecord : total
