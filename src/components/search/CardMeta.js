@@ -15,17 +15,19 @@ const buildDetails = (result) => {
             ) {
                 Object.entries(result._source[key]).forEach(([i, val]) => {
                     Object.entries(val).forEach(([k, v]) => {
-                        meta.push(
-                            <React.Fragment key={k}>
-                                <span className='span-title'>{k}: </span>
-                                <span
-                                    dangerouslySetInnerHTML={{
-                                        __html: v
-                                    }}
-                                />
-                                <br />
-                            </React.Fragment>
-                        )
+                        if (!k.includes('datasource')) {
+                            meta.push(
+                                <React.Fragment key={k}>
+                                    <span className='span-title'>{k}: </span>
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: v
+                                        }}
+                                    />
+                                    <br />
+                                </React.Fragment>
+                            )
+                        }
                     })
                 })
             } else {

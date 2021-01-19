@@ -1,4 +1,5 @@
 export const apiUrl = 'https://api.asianlegacylibrary.org/resources'
+export const libraryUrl = 'https://library.asianlegacylibrary.org'
 export const fieldMapping = {
     'bibframe:maintitle': 'Main Title',
     'bibframe:varianttitle': 'Variant Title',
@@ -49,6 +50,7 @@ export const modelKeys = {
         'bibframe:collection',
         'bibframe:language',
         'bibframe:identifier',
+        'all:catalognumber',
         'all:chklevel',
         'all:relatedworks',
         'all:items'

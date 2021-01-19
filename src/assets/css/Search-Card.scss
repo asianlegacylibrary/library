@@ -19,6 +19,9 @@
     letter-spacing: 0.02rem;
     padding-right: var(--padding-sub-container);
 }
+.span-details {
+    font-size: 0.8em;
+}
 .author-data,
 .subject-data {
     background-color: #ebebeb;
@@ -109,4 +112,5 @@
     margin-bottom: 1em;
     //margin: 1em;
     border: 1px solid var(--color-subtitle);
+    font-size: inherit;
 }
