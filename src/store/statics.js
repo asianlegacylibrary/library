@@ -49,7 +49,9 @@ export const modelKeys = {
         'bibframe:collection',
         'bibframe:language',
         'bibframe:identifier',
-        'all:chklevel'
+        'all:chklevel',
+        'all:relatedworks',
+        'all:items'
     ]
 }
 

@@ -4,23 +4,43 @@ import { modelKeys } from '../../store/statics'
 
 const buildDetails = (result) => {
     let meta = []
-    //let author = []
     let title = []
 
     modelKeys.meta.forEach((key, i) => {
         //let type = checkLoc(result, key)
         if (key in result._source) {
-            meta.push(
-                <React.Fragment key={i}>
-                    <span className='span-title'>{key}: </span>
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: result._source[key]
-                        }}
-                    />
-                    <br />
-                </React.Fragment>
-            )
+            if (
+                Array.isArray(result._source[key]) &&
+                result._source[key] !== undefined
+            ) {
+                Object.entries(result._source[key]).forEach(([i, val]) => {
+                    Object.entries(val).forEach(([k, v]) => {
+                        meta.push(
+                            <React.Fragment key={k}>
+                                <span className='span-title'>{k}: </span>
+                                <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: v
+                                    }}
+                                />
+                                <br />
+                            </React.Fragment>
+                        )
+                    })
+                })
+            } else {
+                meta.push(
+                    <React.Fragment key={i}>
+                        <span className='span-title'>{key}: </span>
+                        <span
+                            dangerouslySetInnerHTML={{
+                                __html: result._source[key]
+                            }}
+                        />
+                        <br />
+                    </React.Fragment>
+                )
+            }
         }
     })
 
@@ -32,7 +52,6 @@ const buildDetails = (result) => {
                     <span className='span-title'>{key}: </span>
                     <span
                         dangerouslySetInnerHTML={{
-                            //__html: result[type][key]
                             __html: result._source[key]
                                 .replace(/(\r\n|\n|\r)/gm, '<br>')
                                 .replace(/(<br\s*\/?>){3,}/gi, '<br>')

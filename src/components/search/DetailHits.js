@@ -38,7 +38,7 @@ function a11yProps(index) {
 }
 
 export default function SimpleTabs(props) {
-    let { data, total, mainId } = props
+    let { data, mainId } = props
     const [value, setValue] = React.useState(0)
 
     const handleChange = (event, newValue) => {
@@ -47,7 +47,7 @@ export default function SimpleTabs(props) {
 
     let t = []
     let p = []
-    let author = []
+    //let author = []
 
     data.forEach((d, i) => {
         let id = d._id
