@@ -2,41 +2,42 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Header, SearchForm, Results, Details } from './index'
 import { StylesProvider } from '@material-ui/core/styles'
-//import logo from '../assets/img/logo.png'
 
+/*
+ROUTER COMPONENT
+- controls routing in the app
+- components are found here
+- see the Express API for data sent to endpoints
+SEARCH /search
+- main page displays the Search Bar, filters, etc and search results
+DETAILS /details
+- each returned result can be further inspected, returns all data for specified ID
+*/
 export function AppRouter() {
     return (
         <Router>
             <StylesProvider injectFirst>
                 <div className='container'>
-                    {/* <img
-                        className='background-logo'
-                        src={logo}
-                        alt='main background logo'
-                    /> */}
                     <Header />
-                    {/* <SearchForm /> */}
+
                     <Switch>
-                        {/* <Route path={['/', '/results']} children={<SearchBar />} /> */}
                         <Route
                             exact
                             path={['/search:term?', '/search', '/']}
-                            //component={Results}
                             render={() => {
                                 return (
                                     <React.Fragment>
-                                        {/* could put the search form here...? */}
                                         <SearchForm />
                                         <Results />
                                     </React.Fragment>
                                 )
                             }}
                         />
-                        {/* <Route path='/details/:id?' component={Details} /> */}
+
                         <Route
                             path='/details/:id?'
-                            render={() => {
-                                return <Details />
+                            render={(props) => {
+                                return <Details {...props} />
                             }}
                         />
                     </Switch>

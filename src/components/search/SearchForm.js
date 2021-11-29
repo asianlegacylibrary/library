@@ -8,7 +8,6 @@ import {
     pageDown
 } from '../../store/actions'
 import { connect } from 'react-redux'
-//import { SearchBar } from './index'
 import { withRouter } from 'react-router-dom'
 import { constants } from '../../store/types'
 import { URLParamsForUser, URLParamsPlaceholders } from '../../store/statics'
@@ -22,6 +21,7 @@ class SearchForm_PreConnect extends React.Component {
 
     componentDidMount = () => {
         // check for url params on mount, add to state
+        // so we're saying, see if URL params are already in the URL, if so we must parse them and update components
         //let q = new URLSearchParams(this.props.location.search).get('q')
         this.handleUrlParams(this.props.location.search)
     }
@@ -250,13 +250,7 @@ class SearchForm_PreConnect extends React.Component {
                 >
                     COPY SEARCH URL
                 </Button>
-                {/* <Button
-                        className="waves-effect waves-light btn wide"
-                        disabled={this.props.results.isFetching}
-                        onClick={(e) => this.handleNewSearch(e)}
-                    >
-                        {this.props.results.isFetching ? 'Searching' : `Search`}
-                    </Button> */}
+
                 <div className='result-pagination'>
                     <Button
                         variant='outlined'

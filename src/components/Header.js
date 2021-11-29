@@ -5,8 +5,8 @@ import logo from '../assets/img/logo.png'
 
 import { actions } from '../store/types'
 
+// HEADER - top bar
 export function Header() {
-    //let location = useLocation()
     const dispatch = useDispatch()
 
     return (
@@ -23,12 +23,7 @@ export function Header() {
                         width='50px'
                     />
                 </a>
-                <p className='header-title'>
-                    API{' '}
-                    {/* <span className='show-params'>
-                        {unescape(location.pathname)}
-                    </span> */}
-                </p>
+                <p className='header-title'>API Explorer </p>
             </div>
         </header>
     )

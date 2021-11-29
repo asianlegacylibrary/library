@@ -57,7 +57,7 @@ export const getAsyncAction = ({ actionType, asyncFunc }) => {
                 dispatch(dealWithParameters(params, paramAction))
                 response = await asyncFunc(getState().URLParams)
             } else if (actionType === 'DETAILS') {
-                console.log(params)
+                console.log('async action', params)
                 response = await asyncFunc(params)
             }
 

@@ -3,6 +3,38 @@ import React from 'react'
 import { CardMeta } from './CardMeta'
 import { rootFields } from '../../store/statics'
 
+function buildNestedAuthorData(source, type) {
+    let nestedType = Object.entries(source).map(([k, v]) => {
+        if (v != null) {
+            let subV = []
+            if (Array.isArray(v)) {
+                subV = v.map((a, i) => {
+                    return (
+                        <span key={i} className={`${type}-variants`}>
+                            {a}
+                        </span>
+                    )
+                })
+            } else {
+                subV = v
+            }
+            return (
+                <div key={k}>
+                    <span className='span-title'>{k}: </span>
+                    {subV}
+                </div>
+            )
+        }
+        return null
+    })
+
+    return (
+        <div key={type} className={`${type}-data`}>
+            {nestedType}
+        </div>
+    )
+}
+
 function buildNestedData(source, type) {
     let nestedType = Object.entries(source[rootFields[type]][0]).map(
         ([k, v]) => {
@@ -38,10 +70,12 @@ function buildNestedData(source, type) {
 }
 
 function buildAuthor(source) {
-    let author = Object.entries(source[rootFields.author][0]).map(([k, v]) => {
+    let author = Object.entries(source[rootFields.author]).map(([k, v]) => {
         if (v != null) {
             let subV = []
-            if (Array.isArray(v)) {
+            if (typeof v === 'object' && !Array.isArray(v)) {
+                return buildNestedAuthorData(v, 'author')
+            } else if (Array.isArray(v)) {
                 subV = v.map((a, i) => {
                     return (
                         <span key={i} className='author-variants'>
