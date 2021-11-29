@@ -21,7 +21,7 @@ export const fetchResults = async (params) => {
 export const fetchDetails = async (params) => {
     try {
         let response = await expressURL.get(
-            `${elastic.resources}/${params.id}/search?q=${params.q}&include_data=true`
+            `${elastic.resources}/${params.id}/search/v2?q=${params.q}&include_data=true`
         )
 
         return response
