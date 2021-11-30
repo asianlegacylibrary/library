@@ -13,13 +13,13 @@ export const fieldMapping = {
     'bibframe:role@author.bibframe:name': 'Author',
     'bibframe:role@author.bibframe:variantname': 'Author (Variant)',
     'bibframe:role@author.bibframe:variantname@eng': 'Author (English)',
-    'bibframe:role@author.bibframe:variantname@skt': 'Author (Sanskrit)'
+    'bibframe:role@author.bibframe:variantname@skt': 'Author (Sanskrit)',
 }
 
 export const mainDisplayFields = [
     'bibframe:maintitle',
     'bibframe:varianttitle@eng',
-    'bibframe:person'
+    'bibframe:person',
     //'bibframe:varianttitle@colophon',
     //'bibframe:collection',
 
@@ -37,36 +37,38 @@ export const modelKeys = {
         'bibframe:role@author.bibframe:name',
         'bibframe:role@author.bibframe:variantname',
         'bibframe:role@author.bibframe:variantname@eng',
-        'bibframe:role@author.bibframe:variantname@skt'
+        'bibframe:role@author.bibframe:variantname@skt',
     ],
     title: [
         'bibframe:maintitle',
         'bibframe:varianttitle',
         'bibframe:varianttitle@eng',
         'bibframe:varianttitle@skt',
-        'bibframe:varianttitle@colophon'
+        'bibframe:varianttitle@colophon',
     ],
     meta: [
-        'bibframe:collection',
+        'bibframe:collection@acip',
+        'bibframe:collection@ramachandra',
+        'bibframe:source',
         'bibframe:language',
         'bibframe:identifier',
         'all:catalognumber',
         'all:chklevel',
         'all:relatedworks',
-        'all:items'
-    ]
+        'all:items',
+    ],
 }
 
 export const languageMapping = {
     EN: 'English',
     TB: 'Tibetan',
-    SK: 'Sanskrit'
+    SK: 'Sanskrit',
 }
 
 export const collectionMapping = {
     SB: 'Sungbum',
     KG: 'Kangyur',
-    TG: 'Tengyur'
+    TG: 'Tengyur',
 }
 
 export const collections = {
@@ -76,7 +78,7 @@ export const collections = {
     GA: { desc: 'ACIP Graphics', color: 'col-blue' },
     GM: { desc: 'Mongolia Graphics', color: 'col-gold' },
     GSP: { desc: 'St. Petersburg Graphics', color: 'col-red' },
-    KG: { desc: 'Kangyur', color: 'col-blue' },
+    Kangyur: { desc: 'Kangyur', color: 'col-blue' },
     RCE: { desc: 'Ref-Sanskrit Catalogs', color: 'col-red' },
     RCS: { desc: 'Ref-Sanskrit Catalogs', color: 'col-gold' },
     RCT: { desc: 'Ref-Tibetan Catalogs', color: 'col-blue' },
@@ -89,17 +91,17 @@ export const collections = {
     RHT: { desc: 'Ref-Tibetan Histories', color: 'col-red' },
     SKB: { desc: 'Sanskrit, Buddhist Texts', color: 'col-gold' },
     SKO: { desc: 'Sanskrit, Non-Buddhist Texts', color: 'col-blue' },
-    SB: { desc: 'Sungbum', color: 'col-red' },
-    TG: { desc: 'Tengyur', color: 'col-gold' },
+    Sungbum: { desc: 'Sungbum', color: 'col-red' },
+    Tengyur: { desc: 'Tengyur', color: 'col-gold' },
     LDK: { desc: 'Ladakh', color: 'col-blue' },
     MNG: { desc: 'Mongolia', color: 'col-red' },
     STP: { desc: 'St. Petersburg', color: 'col-gold' },
-    TR: { desc: 'Translations', color: 'col-red' }
+    TR: { desc: 'Translations', color: 'col-red' },
 }
 
 export const rootFields = {
     author: 'bibframe:role@author',
-    subject: 'bibframe:subject'
+    subject: 'bibframe:subject',
 }
 
 export const URLParamsForUser = {
@@ -110,27 +112,27 @@ export const URLParamsForUser = {
     page_size: 10,
     page: 1,
     //near: null,
-    class: 'works'
+    class: 'works',
 }
 
 export const URLParamsPlaceholders = {
     //q: 'Query',
     filter: {
         name: 'filter',
-        value: 'ex. author:exists,collection:-SB,items:exists (negate with -)'
+        value: 'ex. author:exists,collection:-SB,items:exists (negate with -)',
     },
     search_fields: {
         name: 'search fields',
-        value: 'ex. title,colophon,data,subject,author'
+        value: 'ex. title,colophon,data,subject,author',
     },
     highlights: { name: 'highlights', value: 'true or false' },
     page_size: {
         name: 'page size',
-        value: 'number of results returned in each page'
+        value: 'number of results returned in each page',
     },
     page: { name: 'page number', value: '' },
     //near: 'Proximity',
-    class: { name: 'Class', value: 'works, items, subjects, persons' }
+    class: { name: 'Class', value: 'works, items, subjects, persons' },
 }
 
 export const URLtest = {
@@ -138,11 +140,11 @@ export const URLtest = {
     filter: {
         param: 'filter',
         name: 'filter',
-        placeholder: 'ex. author:exists,collection:SB'
+        placeholder: 'ex. author:exists,collection:SB',
     },
     search_fields: {
         param: 'search_fields',
         name: 'search fields',
-        placeholder: 'ex. title,colophon,data,subject,author'
-    }
+        placeholder: 'ex. title,colophon,data,subject,author',
+    },
 }

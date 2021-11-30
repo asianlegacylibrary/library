@@ -45,7 +45,7 @@ function buildHighlights(highlights, source) {
                         dangerouslySetInnerHTML={{
                             __html: v[0]
                                 .replace(/(\r\n|\n|\r)/gm, '<br>')
-                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>'),
                         }}
                     />
                     <br />
@@ -63,7 +63,7 @@ function buildHighlights(highlights, source) {
                         dangerouslySetInnerHTML={{
                             __html: v
                                 .replace(/(\r\n|\n|\r)/gm, '<br>')
-                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>'),
                         }}
                     />
                 </React.Fragment>
@@ -73,15 +73,15 @@ function buildHighlights(highlights, source) {
 
         if (mainDisplayFields.includes(key)) {
             b.unshift(
-                <div key={key} className='main-field'>
-                    <span className='span-title'>{key}: </span>
+                <div key={key} className="main-field">
+                    <span className="span-title">{key}: </span>
                     {vArr}
                 </div>
             )
         } else {
             b.push(
                 <div key={key}>
-                    <span className='span-title'>{key}: </span>
+                    <span className="span-title">{key}: </span>
                     {vArr}
                 </div>
             )
@@ -92,13 +92,13 @@ function buildHighlights(highlights, source) {
         let mainFields = []
         display.sort().forEach((item) => {
             mainFields.push(
-                <div key={item} className='main-field'>
-                    <span className='span-title'>{item}: </span>
+                <div key={item} className="main-field">
+                    <span className="span-title">{item}: </span>
                     <span
                         dangerouslySetInnerHTML={{
                             __html: source[item]
                                 .replace(/(\r\n|\n|\r)/gm, '<br>')
-                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>'),
                         }}
                     />
                     <br />
@@ -107,7 +107,7 @@ function buildHighlights(highlights, source) {
             )
         })
         b.unshift(
-            <div key='main-fields' className='main-fields'>
+            <div key="main-fields" className="main-fields">
                 {mainFields}
             </div>
         )
@@ -139,17 +139,17 @@ export function ResultCard({ data }) {
     const activatedDetails = isActive ? 'make-visible' : ''
 
     const coll = Object.keys(collections).find(
-        (c) => _source['bibframe:collection'] === c
+        (c) => _source['bibframe:collection@acip'] === c
     )
 
     return (
-        <Card className='MuiCard-root' square={true} elevation={1}>
+        <Card className="MuiCard-root" square={true} elevation={1}>
             <CardContent>
-                <div className='result-meta'>
+                <div className="result-meta">
                     <span
-                        className='meta-collection'
+                        className="meta-collection"
                         style={{
-                            border: `1px solid var(--col-neutral)`
+                            border: `1px solid var(--col-neutral)`,
                         }}
                     >
                         {!!coll
@@ -158,8 +158,8 @@ export function ResultCard({ data }) {
                         {'    '}
                     </span>
 
-                    <span className='boldy'>ID: </span>
-                    <span className='boldy'>{_id} </span>
+                    <span className="boldy">ID: </span>
+                    <span className="boldy">{_id} </span>
                     <Button
                         // onClick={() =>
                         //     openInNewTab(
@@ -167,33 +167,33 @@ export function ResultCard({ data }) {
                         //     )
                         // }
 
-                        size='small'
-                        color='primary'
-                        className='go-right view-json'
+                        size="small"
+                        color="primary"
+                        className="go-right view-json"
                     >
                         <a href={`${apiUrl}/${_id}?include_data=true`}>
                             Open JSON Record
                         </a>
                     </Button>
                 </div>
-                {h ? <div className='card-highlights'>{h}</div> : null}
+                {h ? <div className="card-highlights">{h}</div> : null}
             </CardContent>
 
             <CardActions>
-                <Button onClick={toggle} size='small' color='primary'>
+                <Button onClick={toggle} size="small" color="primary">
                     {isActive ? 'Hide More...' : 'Show More...'}
                 </Button>
                 {hasItemData ? (
                     <Button
-                        className='view-json go-right'
+                        className="view-json go-right"
                         onClick={toggle}
-                        size='small'
-                        color='primary'
+                        size="small"
+                        color="primary"
                     >
                         <Link
                             to={{
                                 pathname: `/details/${_id}`,
-                                state: { from: history.location.pathname }
+                                state: { from: history.location.pathname },
                             }}
                         >
                             View Item Record

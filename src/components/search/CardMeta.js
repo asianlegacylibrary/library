@@ -10,33 +10,32 @@ const buildDetails = (result) => {
         //let type = checkLoc(result, key)
         if (key in result._source) {
             if (
-                Array.isArray(result._source[key]) &&
+                //Array.isArray(result._source[key]) &&
+                result._source[key].constructor.name == 'Object' &&
                 result._source[key] !== undefined
             ) {
-                Object.entries(result._source[key]).forEach(([i, val]) => {
-                    Object.entries(val).forEach(([k, v]) => {
-                        if (!k.includes('datasource')) {
-                            meta.push(
-                                <React.Fragment key={k}>
-                                    <span className='span-title'>{k}: </span>
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: v
-                                        }}
-                                    />
-                                    <br />
-                                </React.Fragment>
-                            )
-                        }
-                    })
+                Object.entries(result._source[key]).forEach(([k, v]) => {
+                    if (!k.includes('datasource')) {
+                        meta.push(
+                            <React.Fragment key={k}>
+                                <span className="span-title">{k}: </span>
+                                <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: v,
+                                    }}
+                                />
+                                <br />
+                            </React.Fragment>
+                        )
+                    }
                 })
             } else {
                 meta.push(
                     <React.Fragment key={i}>
-                        <span className='span-title'>{key}: </span>
+                        <span className="span-title">{key}: </span>
                         <span
                             dangerouslySetInnerHTML={{
-                                __html: result._source[key]
+                                __html: result._source[key],
                             }}
                         />
                         <br />
@@ -50,13 +49,13 @@ const buildDetails = (result) => {
         //let type = checkLoc(result, key)
         if (key in result._source) {
             title.push(
-                <p key={i} className='author-item flow-text'>
-                    <span className='span-title'>{key}: </span>
+                <p key={i} className="author-item flow-text">
+                    <span className="span-title">{key}: </span>
                     <span
                         dangerouslySetInnerHTML={{
                             __html: result._source[key]
                                 .replace(/(\r\n|\n|\r)/gm, '<br>')
-                                .replace(/(<br\s*\/?>){3,}/gi, '<br>')
+                                .replace(/(<br\s*\/?>){3,}/gi, '<br>'),
                         }}
                     />
                 </p>
@@ -72,12 +71,12 @@ export function CardMeta({ data }) {
 
     return (
         <React.Fragment>
-            <div className='meta-items'>
-                <p className='meta-item'>{meta}</p>
+            <div className="meta-items">
+                <p className="meta-item">{meta}</p>
             </div>
 
             {title.length > 0 ? (
-                <div className='title-items'>
+                <div className="title-items">
                     <hr />
                     {title}
                 </div>
